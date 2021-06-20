@@ -24,57 +24,97 @@
     <nav class="navbar">
         <div class="navbar__wrapper">
         <img 
-        class="navbar__logo"
-        src="./images/thomas-logo.png"
-        onclick="moveToTop()"
+          class="navbar__logo"
+          src="./images/thomas-logo.png"
+          onclick="moveToSection()"
         />
       <ul class="navbar__list">
           <li>
-              <a
-              class="navbar__link"
-              id="about-link"
-              href="index.html#about">
+              <span
+                class="navbar__link"
+                id="about-link"
+                onclick="moveToSection('about')">
                   <span>About</span>
-              </a>
+              </span>
           </li>
           <li>
-              <a
-              class="navbar__link"
-              id="crew-link"
-              href="index.html#crew">
+              <span
+                class="navbar__link"
+                id="crew-link"
+                onclick="moveToSection('crew')">
                   <span>The crew</span>
-              </a>
+            </span>
           </li>
           <li>
-            <a
-            class="navbar__link"
-            id="videos-link"
-            href="index.html#videos">
+            <span
+              class="navbar__link"
+              id="videos-link"
+              onclick="moveToSection('videos')">
                 <span>Videos</span>
-            </a>
+            </span>
         </li>
       </ul>
       </div>
     </nav>
-    
+
+    <nav class="navbar-mobile">
+        <div class="navbar__wrapper">
+        <img 
+          class="navbar__logo"
+          src="./images/thomas-logo.png"
+          onclick="moveToSection()"
+        />
+
+          <div class="menu-btn" onclick="handleMobileNav()">
+              <div class="menu-btn__burger"></div>
+          </div>
+
+      <ul class="navbar-open" id="slider">
+          <li>
+              <span
+                class="navbar__link"
+                id="about-link"
+                onclick="moveToSection('about')">
+                  <span>About</span>
+              </span>
+          </li>
+          <li>
+              <span
+                class="navbar__link"
+                id="crew-link"
+                onclick="moveToSection('crew')">
+                  <span>The crew</span>
+            </span>
+          </li>
+          <li>
+            <span
+              class="navbar__link"
+              id="videos-link"
+              onclick="moveToSection('videos')">
+                <span>Videos</span>
+            </span>
+        </li>
+      </ul>
+      </div>
+    </nav>
 
         <section class="content__banner">
             <div class="banner__info">
                 <span class="banner__headline">thomas&friends</span>
                 <div 
-                class="banner__container discord"
-                id="banner-btn"
-                onclick="copyToClipboard('URLtoDiscordHERE')">
+                  class="banner__container discord"
+                  id="banner-btn"
+                  onclick="copyToClipboard('URLtoDiscordHERE')">
                     <button 
-                    class="banner__btn"
-                    id="discord-btn"
+                      class="banner__btn"
+                      id="discord-btn"
                     >
                         <img src="images/Discord-Logo-Color.svg" id="discord-logo"/>
                         <span>Discord</span>
                     </button>
                     <button 
-                    class="banner__btn--copied"
-                    id="copied-btn"
+                      class="banner__btn--copied"
+                      id="copied-btn"
                     >
                         <img src="images/white-heart.svg" id="like-icon"/>
                         <span>Copied!</span>
@@ -84,8 +124,8 @@
         </section>
 
         <section
-        class="about-container"
-        id="about">
+          class="about-container"
+          id="about">
             <div class="about-wrapper">
 
                 <div class="card">
@@ -111,18 +151,18 @@
                          temporibus error consectetur illum quisquam alias sed officiis corrupti! Enim impedit expedita quibusdam perferendis commodi 
                          at minus, inventore tempore culpa quis, molestias molestiae aspernatur sit nihil iusto?</p>
                          <iframe
-                         class="about__video" 
-                         width="560" 
-                         height="315" 
-                         src="https://www.youtube.com/embed/gkSCuxi31No"
-                        frameborder="0" 
-                        allowfullscreen></iframe>
+                           class="about__video" 
+                           width="560" 
+                           height="315" 
+                           src="https://www.youtube.com/embed/gkSCuxi31No"
+                           frameborder="0" 
+                           allowfullscreen></iframe>
                 </div>
         </section>
 
         <section
-        class="crew-container"
-        id="crew">
+          class="crew-container"
+          id="crew">
            <h1 class="headline">Our crew</h1>
            <div class="crew-wrapper">
 
@@ -222,28 +262,28 @@
         </section>
         
         <section
-        id="videos"
-        class="video-container">
+          id="videos"
+          class="video-container">
             <h1 class="headline">Videos</h1>
             <div class="video-wrapper">
                 <div class="video">
                     <iframe
-                    class="about__video" 
-                    width="100%" 
-                    height="80%" 
-                    src="https://www.youtube.com/embed/8FewO8dPcd0"
-                   frameborder="0" 
-                   allowfullscreen></iframe>
+                      class="about__video" 
+                      width="100%" 
+                      height="80%" 
+                      src="https://www.youtube.com/embed/8FewO8dPcd0"
+                      frameborder="0" 
+                      allowfullscreen></iframe>
                    <div class="video__description">Avalonian Roads Pt. 1</div>
                 </div>
                 <div class="video">
                     <iframe
-                    class="about__video" 
-                    width="100%" 
-                    height="80%" 
-                    src="https://www.youtube.com/embed/gkSCuxi31No"
-                   frameborder="0" 
-                   allowfullscreen></iframe>
+                      class="about__video" 
+                      width="100%" 
+                      height="80%" 
+                      src="https://www.youtube.com/embed/gkSCuxi31No"
+                      frameborder="0" 
+                      allowfullscreen></iframe>
                    <div class="video__description">Avalonian Roads Pt. 2</div>
                 </div>
             </div>

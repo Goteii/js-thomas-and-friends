@@ -1,3 +1,5 @@
+let menuOpen = false;
+
 const copyToClipboard = str => {
     const el = document.createElement('textarea');
     el.value = str;
@@ -15,8 +17,35 @@ const copyToClipboard = str => {
       document.getElementById('banner-btn').style.borderColor = "rgb(90, 206, 90)";
   }
 
-  const moveToTop = () => {
-    window.scrollTo(0, 0);
+  const moveToSection = (id) => {
+    if(!id) {
+      const scrollOptions = {
+        top: 0,
+        behavior: 'smooth',
+      }
+      window.scrollTo(scrollOptions);
+    }
+    else {
+    const containerIDOffset = document.getElementById(id).offsetTop;
+    const scrollOptions = {
+      top: containerIDOffset,
+      behavior: 'smooth',
+    }
+    window.scrollTo(scrollOptions);
+    }
+  }
+
+  const handleMobileNav = () => {
+    if(!menuOpen) {
+    document.getElementById('slider').style.transform = 'translateX(0%)';
+    document.querySelector('.menu-btn').classList.add('open');
+    menuOpen = true;
+    }
+    else {
+      document.getElementById('slider').style.transform = 'translateX(100%)';
+      document.querySelector('.menu-btn').classList.remove('open');
+      menuOpen = false;
+    }
   }
 
   const wait = (delay = 0) =>
