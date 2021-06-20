@@ -1,0 +1,43 @@
+// colors
+$bgcolor: rgba(17, 3, 17, .95);
+$bgcolor-loader:rgb(17,3,17);
+$bgcolor-footer: rgb(10, 2, 10);
+$font-color-default: #ffffff;
+$font-color-default-hover: #ffffff4b;
+$font-color-dark: #000000;
+
+//spacing unit
+$spacing-unit: 10px;
+
+//font-size
+$font-size-default: 22px;
+$font-size-small: 18px;
+$font-size-tiny: 14px;
+$font-size-tiny-tablet: 12px;
+$font-size-normal-mobile: 10px;
+$font-size-tiny-mobile: 8px;
+$font-size-big: 26px;
+$font-size-huge: 42px;
+$font-size-huge-mobile: 30px;
+
+@mixin font-headline {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+@mixin font-normal {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 100;
+    color: #ffffff;
+}
+
+@mixin banner-btn {
+    @include font-normal;
+    background-color: transparent;
+    border: none;
+    font-size: $font-size-default;
+    cursor: pointer;
+    justify-content: center;
+    width: 100%;
+}

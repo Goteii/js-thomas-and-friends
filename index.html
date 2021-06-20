@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<head>
+    <title>Thomas and Friends</title>
+    <link rel="icon" type="image/png" href="/favicon/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="description" content="Thomas and Friends guild website">
+    <meta name="keywords" content="Albion, Thomas&Friends, Thomas the train, Albion guild, Avalonian roads, Albion guild website, albion website, Thomas and friends website, pvp albion, small scale, small scale albion">
+    <meta name="author" content="Goteii">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;500&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <div class="preload" id="loading">
+        <img src="./images/thomas-logo.png" alt="thomas-and-friends-logo" class="preload-logo" />
+        <div class="spinner">
+        </div>
+    </div>
+
+    <div class="content">
+    <nav class="navbar">
+        <div class="navbar__wrapper">
+        <img 
+          class="navbar__logo"
+          src="./images/thomas-logo.png"
+          onclick="moveToSection()"
+        />
+      <ul class="navbar__list">
+          <li>
+              <span
+                class="navbar__link"
+                id="about-link"
+                onclick="moveToSection('about')">
+                  <span>About</span>
+              </span>
+          </li>
+          <li>
+              <span
+                class="navbar__link"
+                id="crew-link"
+                onclick="moveToSection('crew')">
+                  <span>The crew</span>
+            </span>
+          </li>
+          <li>
+            <span
+              class="navbar__link"
+              id="videos-link"
+              onclick="moveToSection('videos')">
+                <span>Videos</span>
+            </span>
+        </li>
+      </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar-mobile">
+        <div class="navbar__wrapper">
+        <img 
+          class="navbar__logo"
+          src="./images/thomas-logo.png"
+          onclick="moveToSection()"
+        />
+
+          <div class="menu-btn" onclick="handleMobileNav()">
+              <div class="menu-btn__burger"></div>
+          </div>
+
+      <ul class="navbar-open" id="slider">
+          <li>
+              <span
+                class="navbar__link"
+                id="about-link"
+                onclick="moveToSection('about')">
+                  <span>About</span>
+              </span>
+          </li>
+          <li>
+              <span
+                class="navbar__link"
+                id="crew-link"
+                onclick="moveToSection('crew')">
+                  <span>The crew</span>
+            </span>
+          </li>
+          <li>
+            <span
+              class="navbar__link"
+              id="videos-link"
+              onclick="moveToSection('videos')">
+                <span>Videos</span>
+            </span>
+        </li>
+      </ul>
+      </div>
+    </nav>
+
+        <section class="content__banner">
+            <div class="banner__info">
+                <span class="banner__headline">thomas&friends</span>
+                <div 
+                  class="banner__container discord"
+                  id="banner-btn"
+                  onclick="copyToClipboard('URLtoDiscordHERE')">
+                    <button 
+                      class="banner__btn"
+                      id="discord-btn"
+                    >
+                        <img src="images/Discord-Logo-Color.svg" id="discord-logo"/>
+                        <span>Discord</span>
+                    </button>
+                    <button 
+                      class="banner__btn--copied"
+                      id="copied-btn"
+                    >
+                        <img src="images/white-heart.svg" id="like-icon"/>
+                        <span>Copied!</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section
+          class="about-container"
+          id="about">
+            <div class="about-wrapper">
+
+                <div class="card">
+                    <img src="images/war.svg">
+                    <h2 class="card__header">Guaranteed content</h2>
+                    <span class="card__description">Non-mandatory small-scale/ava roads everyday!</span>
+                </div>
+                <div class="card">    
+                     <img src="images/heart-smile.svg">
+                     <h2 class="card__header">Tryhard but chill atmosphere</h2>
+                    <span class="card__description">You will find a lot of friends here as long as you are not a pussy</span>
+                </div>
+                <div class="card">
+                    <img src="images/user-experience.svg">
+                    <h2 class="card__header">Experienced players</h2>
+                   <span class="card__description">We have plenty of experienced players who will help you get better at the game!</span></div>
+                </div>
+
+                <div class="about-content">
+                    <h1 class="headline">About</h1>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus maiores aspernatur aut voluptatem molestias 
+                        quam atque corporis ducimus dolore ipsam vitae beatae illo, nemo sint, hic magni tenetur eveniet veniam recusandae nostrum! Autem,
+                         temporibus error consectetur illum quisquam alias sed officiis corrupti! Enim impedit expedita quibusdam perferendis commodi 
+                         at minus, inventore tempore culpa quis, molestias molestiae aspernatur sit nihil iusto?</p>
+                         <iframe
+                           class="about__video" 
+                           width="560" 
+                           height="315" 
+                           src="https://www.youtube.com/embed/gkSCuxi31No"
+                           frameborder="0" 
+                           allowfullscreen></iframe>
+                </div>
+        </section>
+
+        <section
+          class="crew-container"
+          id="crew">
+           <h1 class="headline">Our crew</h1>
+           <div class="crew-wrapper">
+
+               <div class="crew-leader">
+                   <h2 class="crew-rank">Leader</h2>
+                   <img class="crew-avatar" src="images/leader-avatar.png" />
+                   <span class="crew-name">AgatkaNaFecie</span>
+                   <span class="crew-description">Fucked up junkie trash with burnt out brain. Hes too lazy to do anything in life so he decided to become pro 
+                       caller in albion online. He used to main swords and frosts but it turned out too hard to play so he switched to mace. Yes, mace. Fuck mace
+                       players. Interests? Good avalonian roads and T8 leathers.
+                   </span>
+               </div>
+
+               <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Kolbek</span>
+                <span class="crew-description"> 
+                    Main roles: Tank and Healer which he's really good at.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">MaciusG</span>
+                <span class="crew-description">
+                    Main role: Fire.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">ColdOneCherry</span>
+                <span class="crew-description">
+                    Main role: Carving.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/goteii-avatar.png" />
+                <span class="crew-name">Goteii</span>
+                <span class="crew-description">
+                    Main role: Dagger/Crossbow.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Zargix</span>
+                <span class="crew-description">
+                    The best small-scale healer. Zargix has second shade - becomes very aggressive and selfish while carrying cursed staff.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Ozijar</span>
+                <span class="crew-description">
+                    Retired old man. 
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Kazaron</span>
+                <span class="crew-description">
+                    AgatkaNaFecie's pupil. There is a story that Agatka gave him drugs and Kazaron got wiped off the planet for 2 days. He doesn't act in normal way
+                    since then..
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Kambudza</span>
+                <span class="crew-description">
+                    Main role: Healer.
+                </span>
+            </div>
+
+            <div class="crew-member">
+                <h2 class="crew-rank">Member</h2>
+                <img class="crew-avatar" src="images/leader-avatar.png" />
+                <span class="crew-name">Afera24</span>
+                <span class="crew-description">
+                    Main role: Axe.
+                </span>
+            </div>
+
+          </div>
+        </section>
+        
+        <section
+          id="videos"
+          class="video-container">
+            <h1 class="headline">Videos</h1>
+            <div class="video-wrapper">
+                <div class="video">
+                    <iframe
+                      class="about__video" 
+                      width="100%" 
+                      height="80%" 
+                      src="https://www.youtube.com/embed/8FewO8dPcd0"
+                      frameborder="0" 
+                      allowfullscreen></iframe>
+                   <div class="video__description">Avalonian Roads Pt. 1</div>
+                </div>
+                <div class="video">
+                    <iframe
+                      class="about__video" 
+                      width="100%" 
+                      height="80%" 
+                      src="https://www.youtube.com/embed/gkSCuxi31No"
+                      frameborder="0" 
+                      allowfullscreen></iframe>
+                   <div class="video__description">Avalonian Roads Pt. 2</div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">Website created by Goteii#1134. All rights reserved. &reg;</footer>
+    </div>
+    <script type="text/javascript" src="./js/script.js"></script>
+</body>
+</html>
