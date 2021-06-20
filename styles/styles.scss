@@ -162,12 +162,6 @@ body::after {
             justify-content: space-between;
             flex: 1;
 
-            // .burger {
-            //     padding: $spacing-unit / 2;
-            //     margin: $spacing-unit;
-            //     z-index: 4;
-            // }
-
             .menu-btn {
                 position: relative;
                 display: flex;
@@ -622,9 +616,9 @@ body::after {
                 }
             .crew-description {
                 font-size: $font-size-normal-mobile;
+                    }
+                }
             }
-            }
-            }
-            }
+        }
     } 
 }
