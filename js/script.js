@@ -61,7 +61,7 @@ setVisible('.content', false);
 setVisible('#loading', true);
 
 document.addEventListener('DOMContentLoaded', () =>
-  wait(1000).then(() => {
+  wait(2500).then(() => {
     setVisible('.content', true);
     setVisible('#loading', false);
   }));
