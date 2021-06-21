@@ -18,7 +18,7 @@ const copyToClipboard = str => {
   }
 
   const moveToSection = (id) => {
-    if(!id) {
+    if(id === 'top') {
       const scrollOptions = {
         top: 0,
         behavior: 'smooth',
