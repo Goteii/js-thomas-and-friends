@@ -65,3 +65,19 @@ document.addEventListener('DOMContentLoaded', () =>
     setVisible('.content', true);
     setVisible('#loading', false);
   }));
+
+
+  const showLightbox = (id, title) => {
+    const video = $(`iframe[id='${id}']`);
+    $('.lightbox-container').empty().append(video).fadeIn(1000);
+    $('.lightbox').css('display', 'block');
+    $('.lightbox-header').html(title);
+  }
+
+  const closeLightbox = () => {
+    const videoItem = $('.lightbox').find('iframe');
+    const videoId = $(videoItem).attr('id');
+    const videoContainer = $(`div[id='${videoId}']`);
+    $(videoContainer).append(videoItem);
+    $('.lightbox').css('display', 'none');
+  }

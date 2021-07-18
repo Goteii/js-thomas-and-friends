@@ -20,8 +20,14 @@
         </div>
     </div>
 
+    <div class="lightbox" onclick="closeLightbox()">
+        <h2 class="lightbox-header">Video title</h2>
+        <div class="lightbox-container"></div>
+    </div>
+
     <div class="content">
-    <nav class="navbar">
+        
+        <nav class="navbar">
         <div class="navbar__wrapper">
         <img 
           class="navbar__logo"
@@ -141,8 +147,9 @@
                 <div class="card">
                     <img src="images/icons/user-experience.svg">
                     <h2 class="card__header">Only experienced players</h2>
-                   <span class="card__description">We help eachother to get better and better at our main content</span></div>
+                   <span class="card__description">We help eachother to get better and better at our main content</span>
                 </div>
+            </div>
 
                 <div class="about-content">
                     <h1 class="headline">About</h1>
@@ -155,8 +162,8 @@
                     </p>
                          <iframe
                            class="about__video" 
-                           width="560" 
-                           height="315" 
+                           width="830" 
+                           height="440" 
                            src="https://www.youtube.com/embed/gkSCuxi31No"
                            frameborder="0" 
                            allowfullscreen></iframe>
@@ -269,31 +276,42 @@
           class="video-container">
             <h1 class="headline">Videos</h1>
             <div class="video-wrapper">
-                <div class="video">
+                <div class="video" id="ava_1">
+                    <div class="video-overlay"
+                    onclick="showLightbox('ava_1', 'Avalonian Roads Pt. 1')"></div>
+                    <div class="video__description">Avalonian Roads Pt. 1</div>
                     <iframe
                       class="about__video" 
+                      id="ava_1"
+                      title="Avalonian Roads Pt. 1"
                       width="100%" 
                       height="80%" 
                       src="https://www.youtube.com/embed/8FewO8dPcd0"
                       frameborder="0" 
                       allowfullscreen></iframe>
-                   <div class="video__description">Avalonian Roads Pt. 1</div>
                 </div>
-                <div class="video">
+                <div class="video" id="ava_2">
+                    <div class="video-overlay"
+                    onclick="showLightbox('ava_2', 'Avalonian Roads Pt. 2')"></div>
+                    <div class="video__description">Avalonian Roads Pt. 2</div>
                     <iframe
                       class="about__video" 
+                      id="ava_2"
+                      title="Avalonian Roads Pt. 2"
                       width="100%" 
                       height="80%" 
                       src="https://www.youtube.com/embed/gkSCuxi31No"
                       frameborder="0" 
                       allowfullscreen></iframe>
-                   <div class="video__description">Avalonian Roads Pt. 2</div>
                 </div>
             </div>
+
         </section>
 
         <footer class="footer">Website created by Goteii#1134. All rights reserved. &reg;</footer>
+
     </div>
     <script type="text/javascript" src="./js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 </body>
 </html>

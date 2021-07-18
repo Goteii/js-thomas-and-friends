@@ -128,6 +128,43 @@ body::after {
   background-image: url(../images/thomas-and-friends-bg.png);
 }
 
+.lightbox {
+  display: none;
+  background: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.lightbox .lightbox-header {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.lightbox .lightbox-container {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.lightbox .lightbox-container iframe {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+}
+
 .content {
   width: 70%;
   height: auto;
@@ -594,6 +631,7 @@ body::after {
 }
 
 .content .video-container .video-wrapper {
+  position: relative;
   display: -ms-grid;
   display: grid;
   width: 100%;
@@ -607,10 +645,22 @@ body::after {
 
 .content .video-container .video-wrapper .video {
   margin-right: 10px;
+  position: relative;
+}
+
+.content .video-container .video-wrapper .video .video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  opacity: 1%;
 }
 
 .content .video-container .video-wrapper .video .video__description {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .content .footer {
@@ -681,6 +731,10 @@ body::after {
   }
   .content .about-container .about-wrapper .card .card__description {
     font-size: 14px;
+  }
+  .content .about-container .about-content iframe {
+    width: 80%;
+    min-width: 320px;
   }
   .content .crew-container .crew-wrapper .crew-member .crew-rank {
     font-size: 18px;
