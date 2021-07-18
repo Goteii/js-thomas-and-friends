@@ -653,9 +653,10 @@ body::after {
   top: 0;
   left: 0;
   z-index: 2;
-  height: 100%;
+  margin-top: 10%;
+  height: 90%;
   width: 100%;
-  opacity: 1%;
+  cursor: pointer;
 }
 
 .content .video-container .video-wrapper .video .video__description {
