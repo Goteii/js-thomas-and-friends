@@ -429,7 +429,7 @@ body::after {
             display: grid;
             grid-template-columns: 25% 25% 25% 25%;
             grid-template-rows: 25% 25% 25% 25%;
-            height: 1000px;
+            height: auto;
             text-align: center;
             margin-top: $spacing-unit * 3;
 
@@ -649,7 +649,10 @@ body::after {
         }
         .crew-container {
             .crew-wrapper {
+                grid-template-columns: 33% 33% 33%;
+                grid-template-rows: auto;
                 .crew-leader {
+                    grid-column: 1/4;
                     .crew-avatar {
                         height: 40px;
                     }

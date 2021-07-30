@@ -576,7 +576,7 @@ body::after {
       grid-template-columns: 25% 25% 25% 25%;
   -ms-grid-rows: 25% 25% 25% 25%;
       grid-template-rows: 25% 25% 25% 25%;
-  height: 1000px;
+  height: auto;
   text-align: center;
   margin-top: 30px;
 }
@@ -803,6 +803,17 @@ body::after {
   }
   .content .description {
     font-size: 14px;
+  }
+  .content .crew-container .crew-wrapper {
+    -ms-grid-columns: 33% 33% 33%;
+        grid-template-columns: 33% 33% 33%;
+    -ms-grid-rows: auto;
+        grid-template-rows: auto;
+  }
+  .content .crew-container .crew-wrapper .crew-leader {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    grid-column: 1/4;
   }
   .content .crew-container .crew-wrapper .crew-leader .crew-avatar {
     height: 40px;
