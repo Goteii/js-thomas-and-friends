@@ -617,6 +617,8 @@ body::after {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  padding-left: 3.33333px;
+  padding-right: 3.33333px;
 }
 
 .content .video-container {
@@ -772,7 +774,10 @@ body::after {
   .content .description {
     font-size: 18px;
   }
-  .content .crew-container .crew-wrapper .crew-member .crew-description {
+  .content .crew-container .crew-wrapper .crew-leader {
+    height: auto;
+  }
+  .content .crew-container .crew-wrapper .crew-leader .crew-member .crew-description {
     font-size: 12px;
   }
 }

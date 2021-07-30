@@ -454,6 +454,8 @@ body::after {
                 display: flex;
                 margin-top: $spacing-unit;
                 justify-content: center;
+                padding-left: $spacing-unit / 3;
+                padding-right: $spacing-unit / 3;
             }
         }
     }
@@ -601,9 +603,12 @@ body::after {
         }
         .crew-container {
             .crew-wrapper {
+            .crew-leader {
+                height: auto;
             .crew-member {
             .crew-description {
                 font-size: $font-size-tiny-tablet;
+            }
             }
             }
             }
