@@ -462,19 +462,19 @@ body::after {
 
     .video-container {
         @include font-normal;
-        width: 90%;
+        width: 100%;
         padding-top: $spacing-unit * 8;
-        margin: auto;
         height: auto;
         font-size: $font-size-small;
 
         .video-wrapper {
             position: relative;
             display: grid;
-            width: 100%;
+            width: 90%;
+            margin: auto;
             height: 300px;
             margin-top: $spacing-unit * 5;
-            grid-template-columns: 30% 30% 30%;
+            grid-template-columns: 33% 33% 33%;
             grid-template-rows: 100%;
 
             .video {
