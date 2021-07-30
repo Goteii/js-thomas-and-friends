@@ -421,7 +421,7 @@ body::after {
     .crew-container {
         @include font-normal;
         width: 90%;
-        padding-top: $spacing-unit * 5;
+        padding-top: $spacing-unit * 3;
         margin: auto;
         height: auto;
 
@@ -431,14 +431,13 @@ body::after {
             grid-template-rows: 25% 25% 25% 25%;
             height: auto;
             text-align: center;
-            margin-top: $spacing-unit * 3;
 
             .crew-leader {
                 grid-column-start: 1;
                 grid-column-end: 5;
             }
             .crew-rank {
-                margin-top: $spacing-unit * 2;
+                margin-top: $spacing-unit * 5;
             }
             .crew-avatar {
                 border-radius: 50%;
@@ -473,10 +472,10 @@ body::after {
             display: grid;
             width: 100%;
             margin: auto;
-            height: 300px;
+            height: auto;
             margin-top: $spacing-unit * 5;
             grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 100%;
+            grid-template-rows: 1fr;
 
             .video {
             margin-right: $spacing-unit;
@@ -495,7 +494,6 @@ body::after {
 
             .video__description {
                 text-align: center;
-                margin-bottom: $spacing-unit * 2;
             }
             }
         }
@@ -668,6 +666,7 @@ body::after {
                 }
             .crew-member {
                 .crew-rank {
+                    margin-top: $spacing-unit * 2;
                     font-size: $font-size-tiny;
                 }
                 .crew-avatar {
@@ -680,6 +679,11 @@ body::after {
                 font-size: $font-size-normal-mobile;
                     }
                 }
+            }
+        }
+        .video-container {
+            .video-wrapper {
+                grid-template-columns: 1fr;
             }
         }
     } 

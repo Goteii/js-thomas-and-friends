@@ -564,7 +564,7 @@ body::after {
   font-weight: 100;
   color: #ffffff;
   width: 90%;
-  padding-top: 50px;
+  padding-top: 30px;
   margin: auto;
   height: auto;
 }
@@ -578,7 +578,6 @@ body::after {
       grid-template-rows: 25% 25% 25% 25%;
   height: auto;
   text-align: center;
-  margin-top: 30px;
 }
 
 .content .crew-container .crew-wrapper .crew-leader {
@@ -588,7 +587,7 @@ body::after {
 }
 
 .content .crew-container .crew-wrapper .crew-rank {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .content .crew-container .crew-wrapper .crew-avatar {
@@ -638,12 +637,12 @@ body::after {
   display: grid;
   width: 100%;
   margin: auto;
-  height: 300px;
+  height: auto;
   margin-top: 50px;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-  -ms-grid-rows: 100%;
-      grid-template-rows: 100%;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
 }
 
 .content .video-container .video-wrapper .video {
@@ -664,7 +663,6 @@ body::after {
 
 .content .video-container .video-wrapper .video .video__description {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .content .footer {
@@ -828,6 +826,7 @@ body::after {
     font-size: 12px;
   }
   .content .crew-container .crew-wrapper .crew-member .crew-rank {
+    margin-top: 20px;
     font-size: 14px;
   }
   .content .crew-container .crew-wrapper .crew-member .crew-avatar {
@@ -838,6 +837,10 @@ body::after {
   }
   .content .crew-container .crew-wrapper .crew-member .crew-description {
     font-size: 10px;
+  }
+  .content .video-container .video-wrapper {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
   }
 }
 /*# sourceMappingURL=styles.css.map */
