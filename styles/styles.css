@@ -625,9 +625,10 @@ body::after {
   font-family: 'Barlow', sans-serif;
   font-weight: 100;
   color: #ffffff;
-  width: 100%;
+  width: 90%;
   padding-top: 80px;
   height: auto;
+  margin: auto;
   font-size: 18px;
 }
 
@@ -635,12 +636,12 @@ body::after {
   position: relative;
   display: -ms-grid;
   display: grid;
-  width: 90%;
+  width: 100%;
   margin: auto;
   height: 300px;
   margin-top: 50px;
-  -ms-grid-columns: 33% 33% 33%;
-      grid-template-columns: 33% 33% 33%;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
   -ms-grid-rows: 100%;
       grid-template-rows: 100%;
 }
