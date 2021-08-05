@@ -500,7 +500,8 @@ body::after {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 25%;
+  -ms-flex-preferred-size: 27.5%;
+      flex-basis: 27.5%;
   background-color: rgba(255, 255, 255, 0.123);
   -webkit-transform: skew(-4deg);
           transform: skew(-4deg);
@@ -557,6 +558,10 @@ body::after {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.content .about-container .about-content #about__video-mobile {
+  display: none;
 }
 
 .content .crew-container {
@@ -747,6 +752,12 @@ body::after {
 }
 
 @media (max-width: 900px) {
+  .content {
+    width: 100%;
+  }
+  .content .navbar .navbar__wrapper {
+    width: 100%;
+  }
   .content__banner {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -766,9 +777,6 @@ body::after {
   }
   .content .about-container .about-wrapper .card .card__description {
     font-size: 12px;
-  }
-  .content .about-container .about-content .about__video {
-    width: 80%;
   }
   .content .description {
     font-size: 18px;
@@ -796,11 +804,36 @@ body::after {
   .content__banner .banner__info .banner__container {
     width: 60%;
   }
+  .content .about-container .about-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: auto;
+    margin: auto;
+    width: 70%;
+  }
+  .content .about-container .about-wrapper .card {
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 20px;
+  }
   .content .about-container .about-wrapper .card .card__header {
-    font-size: 12px;
+    font-size: 14px;
+    padding-bottom: 15px;
   }
   .content .about-container .about-wrapper .card .card__description {
-    font-size: 8px;
+    padding-bottom: 10px;
+  }
+  .content .about-container .about-content #about__video-desktop {
+    display: none;
+  }
+  .content .about-container .about-content #about__video-mobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 25px;
+    padding: 0;
   }
   .content .headline {
     text-align: center;
