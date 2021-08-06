@@ -432,7 +432,7 @@ body::after {
         .crew-wrapper {
             display: grid;
             grid-template-columns: 25% 25% 25% 25%;
-            grid-template-rows: 25% 25% 25% 25%;
+            grid-template-rows: auto;
             height: auto;
             text-align: center;
 
