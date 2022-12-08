@@ -120,7 +120,7 @@ const getVideos = () => {
     videoDiv.id = el.id;
     const videoOverlay = document.createElement("div");
     videoOverlay.className = "video-overlay";
-    videoOverlay.addEventListener("click", showLightbox(el.id, el.title));
+    videoOverlay.addEventListener("click", () => showLightbox(el.id, el.title));
     videoDiv.appendChild(videoOverlay);
     const videoDescription = document.createElement("div");
     videoDescription.class = "video__description";
@@ -133,7 +133,7 @@ const getVideos = () => {
     iframe.width = "100%";
     iframe.height = "80%";
     iframe.src = el.iframeSrc;
-    iframe.frameborder = "0";
+    iframe.frameborder = "0px";
     iframe.allowFullscreen = true;
     videoDiv.appendChild(iframe);
 
