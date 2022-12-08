@@ -138,6 +138,7 @@ body::after {
   width: 100%;
   margin: auto;
   height: 100%;
+  border: none;
 }
 
 .content {
@@ -499,7 +500,7 @@ body::after {
   text-align: center;
 }
 .content .video-container .video-wrapper .video iframe {
-  border: 0;
+  border: none;
 }
 .content .footer {
   font-family: "Barlow", sans-serif;

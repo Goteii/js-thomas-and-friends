@@ -124,6 +124,7 @@ body::after {
       width: 100%;
       margin: auto;
       height: 100%;
+      border: none;
     }
 }
 
@@ -501,7 +502,7 @@ body::after {
             }
 
             iframe {
-                border: 0;
+                border: none;
             }
             }
         }
