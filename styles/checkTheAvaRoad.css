@@ -1,0 +1,309 @@
+.navbar__list li {
+  font-size: 28px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.preload {
+  z-index: 3;
+  height: 100vh;
+  background-color: rgb(17, 3, 17);
+}
+.preload .preload-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  height: 80px;
+  transform: translate(-50%, 0%);
+  margin-top: -50px;
+}
+.preload .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  margin: auto;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  -webkit-mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%);
+          mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%);
+  transform-origin: 50% 60%;
+  transform: perspective(200px) rotateX(80deg);
+  -webkit-animation: spinner-wiggle 1.2s infinite;
+          animation: spinner-wiggle 1.2s infinite;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+.preload .spinner:before,
+.preload .spinner:after {
+  content: "";
+  position: absolute;
+  margin: -4px;
+  box-sizing: inherit;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  opacity: 0.05;
+  border: inherit;
+  border-color: transparent;
+  -webkit-animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+          animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+}
+.preload .spinner:before {
+  border-top-color: red;
+}
+.preload .spinner:after {
+  border-top-color: red;
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+@-webkit-keyframes spinner-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spinner-fade {
+  20% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.1;
+  }
+}
+@keyframes spinner-fade {
+  20% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.1;
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  transform: translateZ(0);
+  z-index: -1;
+  background-image: url(../images/thomas-and-friends-bg.png);
+}
+
+.content {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  overflow: hidden;
+  background-color: rgba(17, 3, 17, 0.95);
+}
+
+.footer {
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  background-color: rgb(10, 2, 10);
+  margin-top: 40px;
+}
+
+.navbar {
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  color: #ffffff;
+  position: fixed;
+  background-color: rgba(17, 3, 17, 0.95);
+  height: 60px;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+  display: flex;
+}
+
+.navbar__wrapper {
+  display: flex;
+  width: 70%;
+  margin: auto;
+}
+
+.navbar__logo {
+  height: 60px;
+  cursor: pointer;
+}
+
+.navbar__logo:hover {
+  -webkit-animation: pulse 1s infinite;
+          animation: pulse 1s infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.navbar__list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#tool {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+#tool h3 {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 18px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.search__component {
+  margin: 30px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search__component input {
+  width: 400px;
+  padding: 10px 0;
+  margin: 0 15px;
+  text-align: center;
+  border-radius: 7.5px;
+  border: none;
+}
+
+.search__btn {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-family: "Barlow", sans-serif;
+}
+
+.search__btn:hover {
+  cursor: pointer;
+}
+
+.result {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 360px;
+  margin: 10px 20px;
+}
+
+.result h4, .result h5, .result p {
+  text-align: center;
+}
+
+.result__details--chests, .result__details--gatheringspots {
+  display: flex;
+  justify-content: space-around;
+}
+
+.result__details--green, .result__details--blue, .result__details--gold, .result_details--leather, .result_details--iron {
+  display: flex;
+  flex-direction: column;
+}
+
+.chest-info {
+  text-align: center;
+}
+
+.result__details--dungeons {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+.green-chest::before, .blue-chest::before, .gold-chest::before, .dungeon::before, .gatheringspot--leather::before, .gatheringspot--iron::before {
+  background-size: 40px;
+  display: inline-block;
+  width: 40px;
+  height: 32.5px;
+  content: "";
+  margin-right: 5px;
+}
+
+.green-chest::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/greenchest.png");
+}
+
+.blue-chest::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/bluechest.png");
+}
+
+.gold-chest::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/goldenchest.png");
+}
+
+.dungeon::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/dung.png");
+}
+
+.gatheringspot--leather::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/dung.png");
+}
+
+.gatheringspot--iron::before {
+  background-image: url("../images/icons/checkTheAvaRoadTool/result-icons/dung.png");
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (max-width: 900px) {
+  .navbar__list {
+    display: none;
+  }
+  .navbar__wrapper {
+    justify-content: center;
+  }
+}/*# sourceMappingURL=checkTheAvaRoad.css.map */

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <title>Thomas&Friends</title>
+    <link rel="icon" type="image/png" href="/favicon/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="description" content="Thomas&Friends Guild Website">
+    <meta name="keywords" content="Albion, Thomas&Friends, Thomas the train, Albion guild, Avalonian roads, Albion guild website, albion website, Thomas and friends website, pvp albion, small scale, small scale albion, albion ava roads, albion avalonian roads, avalonian roads, albion thomas and friends, albion">
+    <meta name="author" content="Goteii">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/checkTheAvaRoad.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;500&display=swap" rel="stylesheet">
+    
+
+    <body>
+        <div class="preload" id="loading">
+            <img src="../images/thomas-logo.png" alt="thomas-and-friends-logo" class="preload-logo" />
+            <div class="spinner">
+            </div>
+        </div>
+
+        <nav class="navbar">
+        <div class="navbar__wrapper">
+            <a href="../index.html">
+                <img 
+                class="navbar__logo"
+                src="../images/thomas-logo.png"
+                />
+            </a>
+      <ul class="navbar__list">
+          <li>CheckTheAvaRoad Tool</li>
+      </ul>
+      </div>
+    </nav>
+        
+        <main class="content">
+            
+            <section id="tool">
+                <h3>CheckTheAvaRoad Tool allows you to check every road you want! You can find how many camps,dungeons,gathering spots are in there with their tier</h3>
+               <div class="search__component">
+                <input id="searchInput" name="searchInput" maxlength="25"/>
+                <button type="submit" class="search__btn" id="search__btn">Search</button>
+
+                <!-- add filters, checkboxes -->
+
+            </div>
+            <div class="search__results" id="search-results">
+                <!-- data inserted from checkTheAvaRoad.js -->
+            </div>
+            </section>
+    
+    
+            
+            <footer class="footer">Website created by Goteii#1134. All rights reserved. &reg;</footer>
+        </main>
+        <script type="module" src="../js/checkTheAvaRoad.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    </body>
+</head>
