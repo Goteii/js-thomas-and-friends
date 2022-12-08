@@ -499,6 +499,10 @@ body::after {
             .video__description {
                 text-align: center;
             }
+
+            iframe {
+                border: 0;
+            }
             }
         }
     }

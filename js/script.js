@@ -133,7 +133,6 @@ const getVideos = () => {
     iframe.width = "100%";
     iframe.height = "80%";
     iframe.src = el.iframeSrc;
-    iframe.frameborder = "0px";
     iframe.allowFullscreen = true;
     videoDiv.appendChild(iframe);
 
@@ -154,4 +153,5 @@ if (
   window.handleMobileNav = handleMobileNav;
   window.copyToClipboard = copyToClipboard;
   window.moveToSection = moveToSection;
+  window.closeLightbox = closeLightbox;
 }
