@@ -27,17 +27,42 @@
                 src="../images/thomas-logo.png"
                 />
             </a>
-      <ul class="navbar__list">
-          <li>CheckTheAvaRoad Tool</li>
-      </ul>
+
       </div>
     </nav>
         
         <main class="content">
             
             <section id="tool">
-                <h3>CheckTheAvaRoad Tool allows you to check every road you want! You can find how many camps,dungeons,gathering spots are in there with their tier</h3>
-               <div class="search__component">
+                <h3>CheckTheAvaRoad Tool allows you to check every road you want! You can find how many camps,dungeons,gathering spots are in there and what tier they are!</h3>
+              <div class="legend" id="legend">
+                <p>Legend for map color which indicates what dominates on map:</p>
+                <div class="items">
+
+              
+                <div class="item green-chest-color">
+                    <div class="square"></div>
+                    <span>Green Chests</span>
+                </div>
+                <div class="item blue-chest-color">
+                    <div class="square"></div>
+                    <span>Blue Chests</span>
+                </div>
+                <div class="item gold-chest-color">
+                    <div class="square"></div>
+                    <span>Gold Chests</span>
+                </div>
+                <div class="item dungeon-color">
+                    <div class="square"></div>
+                    <span>Dungeons</span>
+                </div>
+                <div class="item gathering-spot-color">
+                    <div class="square"></div>
+                    <span>Gathering Spots</span>
+                </div>
+              </div>
+            </div>
+                <div class="search__component">
                 <input id="searchInput" name="searchInput" maxlength="25"/>
                 <button type="submit" class="search__btn" id="search__btn">Search</button>
 

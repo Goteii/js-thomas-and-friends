@@ -1,4 +1,8 @@
 import { AVA_ROADS } from "../utils/avaRoads.js";
+import {
+  createMyElement,
+  createColumnOfDifferentTierItems,
+} from "./resultBuildMethods.js";
 
 const wait = (delay = 0) =>
   new Promise((resolve) => setTimeout(resolve, delay));
@@ -19,17 +23,113 @@ document.addEventListener("DOMContentLoaded", () =>
   })
 );
 
-const fetchAvaRoads = (input) => {
-  const searchResultsWrapper = document.getElementById("search-results");
-  const resultsShown = document.getElementsByClassName("result");
-  if (resultsShown.length > 0) {
-    Array.from(resultsShown).forEach((resultShown) => resultShown.remove());
-  }
-  const results = input
-    ? AVA_ROADS.filter((avaRoad) => avaRoad.name.includes(input))
-    : AVA_ROADS;
+const getClassNameForMapName = (searchResult) => {
+  let greenChestsAmount = 0;
+  let blueChestsAmount = 0;
+  let goldChestsAmount = 0;
+  let dungeonsAmount = 0;
+  let leatherGatheringSpotsAmount = 0;
+  let ironGatheringSpotsAmount = 0;
+  let stoneGatheringSpotsAmount = 0;
+  let woodGatheringSpotsAmount = 0;
+  //naming to check and change
+  let fluxGatheringSpotsAmount = 0;
+  const thingsOnMapAmountArr = [];
 
-  console.log("input", input);
+  if (searchResult.greenChests && searchResult.greenChests.length) {
+    searchResult.greenChests.forEach(
+      (el) => (greenChestsAmount = greenChestsAmount + el.amount)
+    );
+    thingsOnMapAmountArr.push({
+      name: "green-chest-color",
+      amount: greenChestsAmount,
+    });
+  }
+  if (searchResult.blueChests && searchResult.blueChests.length) {
+    searchResult.blueChests.forEach(
+      (el) => (blueChestsAmount = blueChestsAmount + el.amount)
+    );
+    thingsOnMapAmountArr.push({
+      name: "blue-chest-color",
+      amount: blueChestsAmount,
+    });
+  }
+  if (searchResult.goldChests && searchResult.goldChests.length) {
+    searchResult.goldChests.forEach(
+      (el) => (goldChestsAmount = goldChestsAmount + el.amount)
+    );
+    thingsOnMapAmountArr.push({
+      name: "gold-chest-color",
+      amount: goldChestsAmount,
+    });
+  }
+  if (searchResult.dungeons && searchResult.dungeons.length) {
+    searchResult.dungeons.forEach(
+      (el) => (dungeonsAmount = dungeonsAmount + el.amount)
+    );
+    thingsOnMapAmountArr.push({
+      name: "dungeon-color",
+      amount: dungeonsAmount,
+    });
+  }
+  if (
+    searchResult.leatherGatheringSpots &&
+    searchResult.leatherGatheringSpots.length
+  ) {
+    searchResult.leatherGatheringSpots.forEach(
+      (el) =>
+        (leatherGatheringSpotsAmount = leatherGatheringSpotsAmount + el.amount)
+    );
+  }
+  if (
+    searchResult.ironGatheringSpots &&
+    searchResult.ironGatheringSpots.length
+  ) {
+    searchResult.ironGatheringSpots.forEach(
+      (el) => (ironGatheringSpotsAmount = ironGatheringSpotsAmount + el.amount)
+    );
+  }
+  if (
+    searchResult.stoneGatheringSpots &&
+    searchResult.stoneGatheringSpots.length
+  ) {
+    searchResult.stoneGatheringSpots.forEach(
+      (el) =>
+        (stoneGatheringSpotsAmount = stoneGatheringSpotsAmount + el.amount)
+    );
+  }
+  if (
+    searchResult.woodGatheringSpots &&
+    searchResult.woodGatheringSpots.length
+  ) {
+    searchResult.woodGatheringSpots.forEach(
+      (el) => (woodGatheringSpotsAmount = woodGatheringSpotsAmount + el.amount)
+    );
+  }
+  if (
+    searchResult.fluxGatheringSpots &&
+    searchResult.fluxGatheringSpots.length
+  ) {
+    searchResult.fluxGatheringSpots.forEach(
+      (el) => (fluxGatheringSpotsAmount = fluxGatheringSpotsAmount + el.amount)
+    );
+  }
+  thingsOnMapAmountArr.push({
+    name: "gathering-spot-color",
+    amount:
+      leatherGatheringSpotsAmount +
+      ironGatheringSpotsAmount +
+      stoneGatheringSpotsAmount +
+      woodGatheringSpotsAmount +
+      fluxGatheringSpotsAmount,
+  });
+  thingsOnMapAmountArr.sort((a, b) => b.amount - a.amount);
+
+  return thingsOnMapAmountArr[0].name;
+};
+
+const createResults = (results) => {
+  const searchResultsWrapper = document.getElementById("search-results");
   results.forEach((el) => {
     const resultWrapper = document.createElement("div");
     resultWrapper.className = "result";
@@ -38,45 +138,36 @@ const fetchAvaRoads = (input) => {
     mapThumbnail.alt = `${el.name} map`;
     // TO REMOVE AFTER GETTING MAP IMAGES TO 360PX WITH GIMP
     mapThumbnail.style.width = "360px";
+
     resultWrapper.appendChild(mapThumbnail);
 
-    const mapName = document.createElement("h4");
-    mapName.innerHTML = el.name;
+    const mapName = createMyElement("h4", getClassNameForMapName(el), el.name);
     resultWrapper.appendChild(mapName);
 
-    const mapTier = document.createElement("h5");
-    mapTier.innerHTML = `Tier: ${el.mapTier}`;
+    const mapTier = createMyElement("h5", "", `Tier: ${el.mapTier}`);
     resultWrapper.appendChild(mapTier);
 
-    const resultDetails = document.createElement("div");
-    resultDetails.className = "result__details";
+    const resultDetails = createMyElement("div", "result__details");
 
     if (el.blueChests.length || el.greenChests.length || el.goldChests.length) {
-      const chestsParagraph = document.createElement("p");
-      chestsParagraph.innerHTML = "Chests:";
+      const chestsParagraph = createMyElement("p", "", "Chests:");
 
       resultDetails.appendChild(chestsParagraph);
 
-      const chestsDetails = document.createElement("div");
-      chestsDetails.className = "result__details--chests";
+      const chestsDetails = createMyElement("div", "result__details--chests");
 
       //green chest logic
       if (el.greenChests.length) {
-        const greenChestDetails = document.createElement("div");
-        greenChestDetails.className = "result__details--green";
-        el.greenChests.forEach((greenChest) => {
-          const chestInfo = document.createElement("div");
-          chestInfo.className = "chest-info";
-          const greenChestAmount = document.createElement("span");
-          greenChestAmount.className = "green-chest";
-          greenChestAmount.innerHTML = `${greenChest.amount}x`;
-          chestInfo.appendChild(greenChestAmount);
-          const greenChestTier = document.createElement("span");
-          greenChestTier.className = "green-chest__tier";
-          greenChestTier.innerHTML = greenChest.tier;
-          chestInfo.appendChild(greenChestTier);
-
-          greenChestDetails.appendChild(chestInfo);
+        const greenChestDetails = createMyElement(
+          "div",
+          "result__details--green"
+        );
+        createColumnOfDifferentTierItems({
+          items: el.greenChests,
+          divClassName: "chest-info",
+          amountSpanClassName: "green-chest",
+          tierSpanClassName: "green-chest__tier",
+          wrapper: greenChestDetails,
         });
 
         chestsDetails.appendChild(greenChestDetails);
@@ -84,21 +175,16 @@ const fetchAvaRoads = (input) => {
 
       //blue chest logic
       if (el.blueChests.length) {
-        const blueChestDetails = document.createElement("div");
-        blueChestDetails.className = "result__details--blue";
-        el.blueChests.forEach((blueChest) => {
-          const chestInfo = document.createElement("div");
-          chestInfo.className = "chest-info";
-          const blueChestAmount = document.createElement("span");
-          blueChestAmount.className = "blue-chest";
-          blueChestAmount.innerHTML = `${blueChest.amount}x`;
-          chestInfo.appendChild(blueChestAmount);
-          const blueChestTier = document.createElement("span");
-          blueChestTier.className = "blue-chest__tier";
-          blueChestTier.innerHTML = blueChest.tier;
-          chestInfo.appendChild(blueChestTier);
-
-          blueChestDetails.appendChild(chestInfo);
+        const blueChestDetails = createMyElement(
+          "div",
+          "result__details--blue"
+        );
+        createColumnOfDifferentTierItems({
+          items: el.blueChests,
+          divClassName: "chest-info",
+          amountSpanClassName: "blue-chest",
+          tierSpanClassName: "blue-chest__tier",
+          wrapper: blueChestDetails,
         });
 
         chestsDetails.appendChild(blueChestDetails);
@@ -106,21 +192,16 @@ const fetchAvaRoads = (input) => {
 
       //gold chest logic
       if (el.goldChests.length) {
-        const goldChestDetails = document.createElement("div");
-        goldChestDetails.className = "result__details--gold";
-        el.goldChests.forEach((goldChest) => {
-          const chestInfo = document.createElement("div");
-          chestInfo.className = "chest-info";
-          const goldChestAmount = document.createElement("span");
-          goldChestAmount.className = "gold-chest";
-          goldChestAmount.innerHTML = `${goldChest.amount}x`;
-          chestInfo.appendChild(goldChestAmount);
-          const goldChestTier = document.createElement("span");
-          goldChestTier.className = "gold-chest__tier";
-          goldChestTier.innerHTML = goldChest.tier;
-          chestInfo.appendChild(goldChestTier);
-
-          goldChestDetails.appendChild(chestInfo);
+        const goldChestDetails = createMyElement(
+          "div",
+          "result__details--gold"
+        );
+        createColumnOfDifferentTierItems({
+          items: el.goldChests,
+          divClassName: "chest-info",
+          amountSpanClassName: "gold-chest",
+          tierSpanClassName: "gold-chest__tier",
+          wrapper: goldChestDetails,
         });
 
         chestsDetails.appendChild(goldChestDetails);
@@ -130,7 +211,6 @@ const fetchAvaRoads = (input) => {
     }
 
     if (el.dungeons.length) {
-      console.log("hi, DUNGEONS");
       const dungeonsParagraph = document.createElement("p");
       dungeonsParagraph.innerHTML = "Dungeons:";
       resultDetails.appendChild(dungeonsParagraph);
@@ -144,7 +224,7 @@ const fetchAvaRoads = (input) => {
 
         const dungeonAmount = document.createElement("span");
         dungeonAmount.className = "dungeon";
-        dungeonAmount.innerHTML = dungeon.amount;
+        dungeonAmount.innerHTML = `${dungeon.amount}x `;
 
         dungeonInfo.appendChild(dungeonAmount);
 
@@ -160,58 +240,43 @@ const fetchAvaRoads = (input) => {
     }
 
     if (el.ironGatheringSpots || el.leatherGatheringSpots) {
-      const gatheringSpotsParagraph = document.createElement("p");
-      gatheringSpotsParagraph.innerHTML = "Gathering spots:";
+      const gatheringSpotsParagraph = createMyElement(
+        "p",
+        "",
+        "Gathering spots:"
+      );
       resultDetails.appendChild(gatheringSpotsParagraph);
 
-      const gatheringSpotsWrapper = document.createElement("div");
-      gatheringSpotsWrapper.className = "result__details--gatheringspots";
+      const gatheringSpotsWrapper = createMyElement(
+        "div",
+        "result__details--gatheringspots"
+      );
 
       if (el.leatherGatheringSpots) {
-        const leatherWrapper = document.createElement("div");
-        leatherWrapper.className = "result_details--leather";
-        el.leatherGatheringSpots.forEach((leatherGatheringSpot) => {
-          const gatheringSpotInfo = document.createElement("div");
-          gatheringSpotInfo.className = "gatheringspot-info";
-
-          const gatheringSpotAmount = document.createElement("span");
-          gatheringSpotAmount.className = "gatheringspot--leather";
-          gatheringSpotAmount.innerHTML = leatherGatheringSpot.amount;
-
-          gatheringSpotInfo.appendChild(gatheringSpotAmount);
-
-          const gatheringSpotTier = document.createElement("span");
-          gatheringSpotTier.className = "gatheringspot__tier";
-          gatheringSpotTier.innerHTML = leatherGatheringSpot.tier;
-
-          gatheringSpotInfo.appendChild(gatheringSpotTier);
-
-          leatherWrapper.appendChild(gatheringSpotInfo);
+        const leatherWrapper = createMyElement(
+          "div",
+          "result_details--leather"
+        );
+        createColumnOfDifferentTierItems({
+          items: el.leatherGatheringSpots,
+          divClassName: "gatheringspot-info",
+          amountSpanClassName: "gatheringspot--leather",
+          tierSpanClassName: "gatheringspot__tier",
+          wrapper: leatherWrapper,
         });
 
         gatheringSpotsWrapper.appendChild(leatherWrapper);
       }
 
       if (el.ironGatheringSpots) {
-        const ironWrapper = document.createElement("div");
-        ironWrapper.className = "result_details--iron";
-        el.ironGatheringSpots.forEach((ironGatheringSpot) => {
-          const gatheringSpotInfo = document.createElement("div");
-          gatheringSpotInfo.className = "gatheringspot-info";
+        const ironWrapper = createMyElement("div", "result_details--iron");
 
-          const gatheringSpotAmount = document.createElement("span");
-          gatheringSpotAmount.className = "gatheringspot--iron";
-          gatheringSpotAmount.innerHTML = ironGatheringSpot.amount;
-
-          gatheringSpotInfo.appendChild(gatheringSpotAmount);
-
-          const gatheringSpotTier = document.createElement("span");
-          gatheringSpotTier.className = "gatheringspot__tier";
-          gatheringSpotTier.innerHTML = ironGatheringSpot.tier;
-
-          gatheringSpotInfo.appendChild(gatheringSpotTier);
-
-          ironWrapper.appendChild(gatheringSpotInfo);
+        createColumnOfDifferentTierItems({
+          items: el.ironGatheringSpots,
+          divClassName: "gatheringspot-info",
+          amountSpanClassName: "gatheringspot--iron",
+          tierSpanClassName: "gatheringspot__tier",
+          wrapper: ironWrapper,
         });
 
         gatheringSpotsWrapper.appendChild(ironWrapper);
@@ -224,84 +289,33 @@ const fetchAvaRoads = (input) => {
   });
 };
 
-{
-  /* <div class="result">
-<div class="result__details">
-    <p>Chests:</p>
-    <div class="result__details--chests">
-        <div class="result__details--green">
+const fetchAvaRoads = () => {
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
 
-            <div class="chest-info">
-                <span class="green-chest">1x</span>
-                <span class="green-chest__tier">VI</span>
-            </div>
-            <div class="chest-info">
-                <span class="green-chest">2x</span>
-                <span class="green-chest__tier">VIII</span>
-            </div>
+  const resultsShown = document.getElementsByClassName("result");
+  if (resultsShown.length > 0) {
+    Array.from(resultsShown).forEach((resultShown) => resultShown.remove());
+  }
+  const results = searchInput
+    ? AVA_ROADS.filter((avaRoad) =>
+        avaRoad.name.toLowerCase().includes(searchInput)
+      )
+    : AVA_ROADS;
 
-        </div>
+  createResults(results);
+};
+fetchAvaRoads();
 
-        <div class="result__details--blue">
-            <div class="chest-info">
-            <span class="blue-chest">2x</span>
-            <span class="blue-chest__tier">VI</span>
-            </div>
-        </div>
-        <div class="result__details--chest">
-            <div class="chest-info">
-        <span class="gold-chest">3x</span> 
-        <span class="gold-chest__tier">VIII</span> 
-        </div>
-        </div>
-    </div>
-    <p>Dungeons:</p>
-    <div class="result__details--dungeons">
-        <div class="dungeon-info">
-            <span class="dungeon">2x</span>
-            <span class="dungeon__tier">VI</span>
-        </div>
-        <div class="dungeon-info">
-            <span class="dungeon">2x</span>
-            <span class="dungeon__tier">VIII</span>
-        </div>
-    </div>
-    <p>Gathering spots:</p>
-    <div class="result__details--gatheringspots">
-        <div class="result_details--leather">
-            <div class="gatheringspot-info">
-                <span class="gatheringspot--leather">2x</span>
-                <span class="gatheringspot__tier">V</span>
-            </div>
-            <div class="gatheringspot-info">
-                <span class="gatheringspot--leather">2x</span>
-                <span class="gatheringspot__tier">VI</span>
-            </div>
-        </div>
-        <div class="result_details--iron">
-            <div class="gatheringspot-info">
-                <span class="gatheringspot--iron">2x</span>
-                <span class="gatheringspot__tier">VIII</span>
-            </div>
-            <div class="gatheringspot-info">
-                <span class="gatheringspot--iron">2x</span>
-                <span class="gatheringspot__tier">VII</span>
-            </div>
-        </div>
-    </div>
-</div>
-</div> */
-}
+const searchBtn = document.getElementById("search__btn");
+searchBtn.addEventListener("click", () => fetchAvaRoads());
 
-if (
-  document.readyState === "interactive" ||
-  document.readyState === "complete"
-) {
-  console.log("loaded");
-  fetchAvaRoads();
+const searchInput = document.getElementById("searchInput");
 
-  const userInput = document.getElementsByTagName("input")[0].value;
-
-  const searchBtn = document.getElementById("search__btn");
-  searchBtn.addEventListener("click", () => fetchAvaRoads(userInput));
-}
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchBtn.click();
+  }
+});
