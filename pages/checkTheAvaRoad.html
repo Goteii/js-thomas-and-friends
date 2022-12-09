@@ -62,13 +62,237 @@
                 </div>
               </div>
             </div>
+
+
                 <div class="search__component">
                 <input id="searchInput" name="searchInput" maxlength="25"/>
                 <button type="submit" class="search__btn" id="search__btn">Search</button>
-
-                <!-- add filters, checkboxes -->
-
             </div>
+                <div class="filters">
+                    <!-- add filters, checkboxes -->
+                    <div class="filters__chests">
+                        <p>Chests:</p>
+                        <div class="filters__chests--green">
+                            <input type="checkbox" name="green-chest" value="green-chest" id="green-chest-checkbox"/> 
+                            <label for="green-chest-checkbox">
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/greenchest.png" alt="green chest" />
+                            </label>
+                            <div class="filters__chest--wrapper hidden" id="green-chest-filter">
+                                <div class="filters__chests--chest" id="green-chest-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="green-chest-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="green-chest-tier" id="green-chest-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="green-chest-amount">At least(amount):</label>
+                                        <input name="green-chest-amount" type="number" min="1" max="5" value="1" id="green-chest-amount-1" class="chest-amount green-chest"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-green-chest">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__chests--blue">
+                            <input type="checkbox" name="blue-chest" value="blue-chest" id="blue-chest-checkbox"/> 
+                            <label for="blue-chest-checkbox">
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/bluechest.png" alt="blue chest" />
+                            </label>
+                            <div class="filters__chest--wrapper hidden" id="blue-chest-filter">
+                                <div class="filters__chests--chest " id="blue-chest-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="blue-chest-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="blue-chest-tier" id="blue-chest-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="blue-chest-amount">At least(amount):</label>
+                                        <input name="blue-chest-amount" type="number" min="1" max="5" value="1" id="blue-chest-amount-1" class="chest-amount"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-blue-chest">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__chests--gold">
+                            <input type="checkbox" name="gold-chest" value="gold-chest" id="gold-chest-checkbox"/> 
+                                <label for="gold-chest-checkbox">
+                                    <img src="../images/icons/checkTheAvaRoadTool/result-icons/goldenchest.png" alt="gold chest" />
+                                </label>
+                            <div class="filters__chest--wrapper hidden" id="gold-chest-filter">
+                                <div class="filters__chests--chest" id="gold-chest-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="gold-chest-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="gold-chest-tier" id="gold-chest-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="gold-chest-amount">At least(amount):</label>
+                                        <input name="gold-chest-amount" type="number" min="1" max="5" value="1" id="gold-chest-amount-1" class="chest-amount"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-gold-chest">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filters__dungeons">
+                        <p>Dungeons:</p>
+                        <div class="filters__dungeons--holder">
+                            <input type="checkbox" name="dungeons" value="dungeons" id="dungeons-checkbox"/> 
+                            <label for="dungeons-checkbox">
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="dungeon"/>
+                            </label>
+                        
+                            <div class="filters__dungeons--wrapper hidden" id="dungeons-filter">
+                                <div class="filters__chests--chest " id="dungeons-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="dungeons-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="dungeons-tier" id="dungeons-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="dungeons-amount">At least(amount):</label>
+                                        <input name="dungeons-amount" type="number" min="1" max="5" value="1" id="dungeons-amount-1" class="chest-amount dungeons"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-dungeons">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filters__gatheringspots">
+                        <p>Gathering Spots:</p>
+                        <div class="filters__gathering-spots--leather">
+                            <input type="checkbox" name="leather" value="leather" id="leather-checkbox"/> 
+                            <label for="leather-checkbox">
+                                <span>Leather:</span>
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="leather"/>
+                            </label>
+                            <div class="filters__leather--wrapper hidden" id="leather-filter">
+                                <div class="filters__chests--chest " id="leather-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="leather-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="leather-tier" id="leather-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="leather-amount">At least(amount):</label>
+                                        <input name="leather-amount" type="number" min="1" max="5" value="1" id="leather-amount-1" class="chest-amount leather"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-leather">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__gathering-spots--iron">
+                            <input type="checkbox" name="iron" value="iron" id="iron-checkbox"/> 
+                            <label for="iron-checkbox">
+                                <span>Iron:</span>
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="iron"/>
+                            </label>
+                            <div class="filters__iron--wrapper hidden" id="iron-filter">
+                                <div class="filters__chests--chest " id="iron-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="iron-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="iron-tier" id="iron-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="iron-amount">At least(amount):</label>
+                                        <input name="iron-amount" type="number" min="1" max="5" value="1" id="iron-amount-1" class="chest-amount iron"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-iron">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__gathering-spots--stone">
+                            <input type="checkbox" name="stone" value="stone" id="stone-checkbox"/> 
+                            <label for="stone-checkbox">Stone:
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="stone"/>
+                            </label>
+                            <div class="filters__stone--wrapper hidden" id="stone-filter">
+                                <div class="filters__chests--chest " id="stone-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="stone-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="stone-tier" id="stone-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="stone-amount">At least(amount):</label>
+                                        <input name="stone-amount" type="number" min="1" max="5" value="1" id="stone-amount-1" class="chest-amount stone"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-stone">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__gathering-spots--wood">
+                            <input type="checkbox" name="wood" value="wood" id="wood-checkbox"/> 
+                            <label for="wood-checkbox">Wood:
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="wood"/>
+                            </label>
+                            <div class="filters__wood--wrapper hidden" id="wood-filter">
+                                <div class="filters__chests--chest " id="wood-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="wood-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="wood-tier" id="wood-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="wood-amount">At least(amount):</label>
+                                        <input name="wood-amount" type="number" min="1" max="5" value="1" id="wood-amount-1" class="chest-amount wood"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-wood">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__gathering-spots--flux">
+                            <input type="checkbox" name="flux" value="flux" id="flux-checkbox"/> 
+                            <label for="flux-checkbox">Flux:
+                                <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="flux"/>
+                            </label>
+                            <div class="filters__flux--wrapper hidden" id="flux-filter">
+                                <div class="filters__chests--chest " id="flux-wrapper">
+                                    <div class="filters__chests--tier">
+                                        <label for="flux-tier">Tier:</label>
+                                        <select class="chest-tier-select" name="flux-tier" id="flux-tier-1">
+                                            <option value="IV">IV</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VIII">VIII</option>
+                                        </select>
+                                    </div>
+                                    <div class="filters__chests--amount">
+                                        <label for="flux-amount">At least(amount):</label>
+                                        <input name="flux-amount" type="number" min="1" max="5" value="1" id="flux-amount-1" class="chest-amount flux"/>
+                                    </div>
+                                    <button class="add-filter-btn" id="add-filter-flux">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+         
             <div class="search__results" id="search-results">
                 <!-- data inserted from checkTheAvaRoad.js -->
             </div>

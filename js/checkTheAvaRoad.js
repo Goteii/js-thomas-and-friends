@@ -319,3 +319,205 @@ searchInput.addEventListener("keypress", (e) => {
     searchBtn.click();
   }
 });
+
+//filters
+
+const filtersAmount = {
+  greenChests: 1,
+  blueChests: 1,
+  goldChests: 1,
+  dungeons: 1,
+  gatheringSpots: 1,
+};
+
+const filtersAmountRequirements = {
+  greenChests: 3,
+  blueChests: 3,
+  goldChests: 3,
+  dungeons: 3,
+  gatheringSpots: 5,
+};
+
+const createFilters = (type, wrapperId, htmlNodeName, btnId) => {
+  if (filtersAmount[type] >= filtersAmountRequirements[type]) {
+    return;
+  }
+  filtersAmount[type]++;
+  const addFilterBtn = document.getElementById(btnId);
+  addFilterBtn.remove();
+  const wrapper = document.getElementById(wrapperId);
+  const chestWrapper = createMyElement("div", "filters__chests--chest");
+  const tierWrapper = createMyElement("div", "filters__chests--tier");
+  const tierLabel = document.createElement("label");
+  tierLabel.htmlFor = `${htmlNodeName}-tier`;
+  tierLabel.innerHTML = "Tier:";
+  tierWrapper.appendChild(tierLabel);
+  const tierSelect = document.createElement("select");
+  tierSelect.className = "chest-tier-select";
+  tierSelect.name = `${htmlNodeName}-tier`;
+  tierSelect.id = `${htmlNodeName}-tier-${filtersAmount[type]}`;
+
+  const tierSelectOptionIVTier = document.createElement("option");
+  tierSelectOptionIVTier.value = "IV";
+  tierSelectOptionIVTier.innerHTML = "IV";
+  tierSelect.appendChild(tierSelectOptionIVTier);
+
+  const tierSelectOptionVITier = document.createElement("option");
+  tierSelectOptionVITier.value = "VI";
+  tierSelectOptionVITier.innerHTML = "VI";
+  tierSelect.appendChild(tierSelectOptionVITier);
+
+  const tierSelectOptionVIIITier = document.createElement("option");
+  tierSelectOptionVIIITier.value = "VIII";
+  tierSelectOptionVIIITier.innerHTML = "VIII";
+  tierSelect.appendChild(tierSelectOptionVIIITier);
+
+  tierWrapper.appendChild(tierSelect);
+  chestWrapper.appendChild(tierWrapper);
+
+  const amountWrapper = createMyElement("div", "filters__chests--amount");
+  const amountLabel = document.createElement("label");
+  amountLabel.htmlFor = `${htmlNodeName}-amount`;
+  amountLabel.innerHTML = "At least(amount):";
+  amountWrapper.appendChild(amountLabel);
+  const amountInput = document.createElement("input");
+  amountInput.name = `${htmlNodeName}-amount`;
+  amountInput.type = "number";
+  amountInput.min = "1";
+  amountInput.max = "5";
+  amountInput.value = "1";
+  amountInput.className = `chest-amount ${htmlNodeName}`;
+  amountInput.id = `${htmlNodeName}-amount-${filtersAmount[type]}`;
+
+  amountWrapper.appendChild(amountInput);
+  chestWrapper.appendChild(amountWrapper);
+
+  if (filtersAmount[type] !== 3) {
+    chestWrapper.appendChild(addFilterBtn);
+  }
+
+  wrapper.appendChild(chestWrapper);
+};
+
+const mainItemCheckboxesDictionary = {
+  greenChest: {
+    type: "greenChests",
+    filterId: "green-chest-filter",
+    htmlNodeName: "green-chest",
+    btnId: "add-filter-green-chest",
+    checkboxId: "green-chest-checkbox",
+  },
+  blueChest: {
+    type: "blueChests",
+    filterId: "blue-chest-filter",
+    htmlNodeName: "blue-chest",
+    btnId: "add-filter-blue-chest",
+    checkboxId: "blue-chest-checkbox",
+  },
+  goldChest: {
+    type: "goldChests",
+    filterId: "gold-chest-filter",
+    htmlNodeName: "gold-chest",
+    btnId: "add-filter-gold-chest",
+    checkboxId: "gold-chest-checkbox",
+  },
+  dungeons: {
+    type: "dungeons",
+    filterId: "dungeons-filter",
+    htmlNodeName: "dungeons",
+    btnId: "add-filter-dungeons",
+    checkboxId: "dungeons-checkbox",
+  },
+  leather: {
+    type: "gatheringSpots",
+    filterId: "leather-filter",
+    htmlNodeName: "leather",
+    btnId: "add-filter-leather",
+    checkboxId: "leather-checkbox",
+  },
+  iron: {
+    type: "gatheringSpots",
+    filterId: "iron-filter",
+    htmlNodeName: "iron",
+    btnId: "add-filter-iron",
+    checkboxId: "iron-checkbox",
+  },
+  wood: {
+    type: "gatheringSpots",
+    filterId: "wood-filter",
+    htmlNodeName: "wood",
+    btnId: "add-filter-wood",
+    checkboxId: "wood-checkbox",
+  },
+  stone: {
+    type: "gatheringSpots",
+    filterId: "stone-filter",
+    htmlNodeName: "stone",
+    btnId: "add-filter-stone",
+    checkboxId: "stone-checkbox",
+  },
+  flux: {
+    type: "gatheringSpots",
+    filterId: "flux-filter",
+    htmlNodeName: "flux",
+    btnId: "add-filter-flux",
+    checkboxId: "flux-checkbox",
+  },
+};
+
+//-----------------------------there is a bug where after clicking add filter('+' button) after a toggle it adds row * number of toggles instead of just one
+// -------------------------- prolly because of not working removeEventListener so evenListeners stack up;
+//listeners
+const listenToMainCheckboxes = () => {
+  for (const [_key, valueObj] of Object.entries(mainItemCheckboxesDictionary)) {
+    const config = valueObj;
+    const mainItemCheckbox = document.getElementById(config.checkboxId);
+    //rethink if its good practise to use 'old ref' to element
+    const addFilterBtnReference = document.getElementById(config.btnId);
+
+    mainItemCheckbox.addEventListener("change", () => {
+      const addFilterBtn = document.getElementById(config.btnId);
+      const wrapper = document.getElementById(config.filterId);
+      if (!mainItemCheckbox.checked) {
+        !wrapper.classList.contains("hidden") &&
+          wrapper.classList.add("hidden");
+
+        //clear fields and add button for 1st row
+        if (wrapper.children.length > 1) {
+          Array.from(wrapper.children).forEach((nodeEl) => {
+            if (!nodeEl.id) nodeEl.remove();
+          });
+          filtersAmount[config.type] = 1;
+          wrapper.children[0].appendChild(addFilterBtnReference);
+        }
+        if (addFilterBtn) {
+          // addFilterBtn.classList.add("disabled");
+          // addFilterBtn.removeEventListener("click", () =>
+          //   createFilters(
+          //     config.type,
+          //     config.filterId,
+          //     config.htmlNodeName,
+          //     config.btnId
+          //   )
+          // );
+        }
+      } else {
+        wrapper.classList.remove("hidden");
+
+        if (addFilterBtn) {
+          // if (addFilterBtn && !addFilterBtn.hasAttribute("listenerOnClick"))
+          addFilterBtn.addEventListener("click", () =>
+            createFilters(
+              config.type,
+              config.filterId,
+              config.htmlNodeName,
+              config.btnId
+            )
+          );
+        }
+      }
+    });
+  }
+};
+
+listenToMainCheckboxes();
