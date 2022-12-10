@@ -308,18 +308,6 @@ const fetchAvaRoads = () => {
 };
 fetchAvaRoads();
 
-const searchBtn = document.getElementById("search__btn");
-searchBtn.addEventListener("click", () => fetchAvaRoads());
-
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    searchBtn.click();
-  }
-});
-
 //filters
 
 const filtersAmount = {
@@ -338,15 +326,60 @@ const filtersAmountRequirements = {
   gatheringSpots: 5,
 };
 
-const createFilters = (type, wrapperId, htmlNodeName, btnId) => {
+const createRemoveBtn = (type, fieldsetId, btnId, wrapperId) => {
+  const removeBtn = document.createElement("button");
+  removeBtn.className = "add-filter-btn";
+  removeBtn.id = `${fieldsetId}-btn-${filtersAmount[type]}`;
+  removeBtn.innerHTML = "-";
+
+  const wrapper = document.getElementById(wrapperId);
+  //get latest id number by getting last fieldset from wrapper's children
+  const latestIdNumber = Array.from(wrapper.children)
+    .filter((child) => child.id.includes(fieldsetId))
+    .splice(-1)[0]
+    .id.split("-")
+    .splice(-1)[0];
+  const fieldset = document.getElementById(`${fieldsetId}-${latestIdNumber}`);
+  console.log("latestId", latestIdNumber, "fieldset", fieldset);
+  removeBtn.onclick = () => {
+    fieldset.remove();
+    filtersAmount[type]--;
+    const addFilterBtn = document.getElementById(btnId);
+    addFilterBtn.classList.remove("hidden");
+  };
+
+  fieldset.appendChild(removeBtn);
+};
+
+const getProperId = (type, fieldsetId, currentId) => {
+  let freeId = currentId;
+  const wrapper = document.getElementById(`${fieldsetId}-${freeId}`);
+  if (!wrapper) {
+    return freeId;
+  }
+  if (wrapper) {
+    const incremented = ++freeId;
+    console.log(incremented, "incremenedrted");
+
+    return getProperId(type, fieldsetId, incremented);
+  }
+};
+
+const createFilters = (type, wrapperId, htmlNodeName, btnId, fieldsetId) => {
+  createRemoveBtn(type, fieldsetId, btnId, wrapperId);
   if (filtersAmount[type] >= filtersAmountRequirements[type]) {
     return;
   }
   filtersAmount[type]++;
+  const id = getProperId(type, fieldsetId, 1);
+  console.log("id", id);
+  console.log(filtersAmount[type]);
   const addFilterBtn = document.getElementById(btnId);
   addFilterBtn.remove();
   const wrapper = document.getElementById(wrapperId);
+
   const chestWrapper = createMyElement("div", "filters__chests--chest");
+  chestWrapper.id = `${fieldsetId}-${id}`;
   const tierWrapper = createMyElement("div", "filters__chests--tier");
   const tierLabel = document.createElement("label");
   tierLabel.htmlFor = `${htmlNodeName}-tier`;
@@ -355,7 +388,7 @@ const createFilters = (type, wrapperId, htmlNodeName, btnId) => {
   const tierSelect = document.createElement("select");
   tierSelect.className = "chest-tier-select";
   tierSelect.name = `${htmlNodeName}-tier`;
-  tierSelect.id = `${htmlNodeName}-tier-${filtersAmount[type]}`;
+  tierSelect.id = `${htmlNodeName}-tier-${id}`;
 
   const tierSelectOptionIVTier = document.createElement("option");
   tierSelectOptionIVTier.value = "IV";
@@ -387,16 +420,39 @@ const createFilters = (type, wrapperId, htmlNodeName, btnId) => {
   amountInput.max = "5";
   amountInput.value = "1";
   amountInput.className = `chest-amount ${htmlNodeName}`;
-  amountInput.id = `${htmlNodeName}-amount-${filtersAmount[type]}`;
+  amountInput.id = `${htmlNodeName}-amount-${id}`;
 
   amountWrapper.appendChild(amountInput);
   chestWrapper.appendChild(amountWrapper);
 
-  if (filtersAmount[type] !== 3) {
-    chestWrapper.appendChild(addFilterBtn);
+  // if (filtersAmount[type] !== 3) {
+  //   chestWrapper.appendChild(addFilterBtn);
+  // }
+
+  const errorMsgs = Array.from(wrapper.children).filter((el) =>
+    el.className.includes("error")
+  );
+  if (errorMsgs) {
+    errorMsgs.forEach((errorMsg) => {
+      errorMsg.remove();
+    });
+    wrapper.appendChild(chestWrapper);
+
+    errorMsgs.forEach((errorMsg) => {
+      wrapper.appendChild(errorMsg);
+    });
+  } else {
+    wrapper.appendChild(chestWrapper);
   }
 
-  wrapper.appendChild(chestWrapper);
+  const len = Array.from(wrapper.children).filter((child) =>
+    child.id.includes(fieldsetId)
+  ).length;
+  console.log("len", len);
+  chestWrapper.appendChild(addFilterBtn);
+  if (len === 3) {
+    addFilterBtn.classList.add("hidden");
+  }
 };
 
 const mainItemCheckboxesDictionary = {
@@ -406,6 +462,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "green-chest",
     btnId: "add-filter-green-chest",
     checkboxId: "green-chest-checkbox",
+    fieldsetId: "green-chest-fieldset",
   },
   blueChest: {
     type: "blueChests",
@@ -413,6 +470,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "blue-chest",
     btnId: "add-filter-blue-chest",
     checkboxId: "blue-chest-checkbox",
+    fieldsetId: "blue-chest-fieldset",
   },
   goldChest: {
     type: "goldChests",
@@ -420,6 +478,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "gold-chest",
     btnId: "add-filter-gold-chest",
     checkboxId: "gold-chest-checkbox",
+    fieldsetId: "gold-chest-fieldset",
   },
   dungeons: {
     type: "dungeons",
@@ -427,6 +486,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "dungeons",
     btnId: "add-filter-dungeons",
     checkboxId: "dungeons-checkbox",
+    fieldsetId: "dungeons-fieldset",
   },
   leather: {
     type: "gatheringSpots",
@@ -434,6 +494,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "leather",
     btnId: "add-filter-leather",
     checkboxId: "leather-checkbox",
+    fieldsetId: "leather-fieldset",
   },
   iron: {
     type: "gatheringSpots",
@@ -441,6 +502,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "iron",
     btnId: "add-filter-iron",
     checkboxId: "iron-checkbox",
+    fieldsetId: "iron-fieldset",
   },
   wood: {
     type: "gatheringSpots",
@@ -448,6 +510,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "wood",
     btnId: "add-filter-wood",
     checkboxId: "wood-checkbox",
+    fieldsetId: "wood-fieldset",
   },
   stone: {
     type: "gatheringSpots",
@@ -455,6 +518,7 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "stone",
     btnId: "add-filter-stone",
     checkboxId: "stone-checkbox",
+    fieldsetId: "stone-fieldset",
   },
   flux: {
     type: "gatheringSpots",
@@ -462,11 +526,13 @@ const mainItemCheckboxesDictionary = {
     htmlNodeName: "flux",
     btnId: "add-filter-flux",
     checkboxId: "flux-checkbox",
+    fieldsetId: "flux-fieldset",
   },
 };
+//---------THERE IS A BUG -> After validating and receiving error messages then unchecking checkbox and checking it again we lose field or button gets added. + console errors
+// check bugs
+// add button for showing/hiding filters - hidden by default
 
-//-----------------------------there is a bug where after clicking add filter('+' button) after a toggle it adds row * number of toggles instead of just one
-// -------------------------- prolly because of not working removeEventListener so evenListeners stack up;
 //listeners
 const listenToMainCheckboxes = () => {
   for (const [_key, valueObj] of Object.entries(mainItemCheckboxesDictionary)) {
@@ -481,39 +547,35 @@ const listenToMainCheckboxes = () => {
       if (!mainItemCheckbox.checked) {
         !wrapper.classList.contains("hidden") &&
           wrapper.classList.add("hidden");
-
+        wrapper.classList.contains("error-wrapper") &&
+          wrapper.classList.remove("error-wrapper");
         //clear fields and add button for 1st row
         if (wrapper.children.length > 1) {
           Array.from(wrapper.children).forEach((nodeEl) => {
-            if (!nodeEl.id) nodeEl.remove();
+            if (!nodeEl.id.includes("1")) nodeEl.remove();
           });
           filtersAmount[config.type] = 1;
           wrapper.children[0].appendChild(addFilterBtnReference);
         }
-        if (addFilterBtn) {
-          // addFilterBtn.classList.add("disabled");
-          // addFilterBtn.removeEventListener("click", () =>
-          //   createFilters(
-          //     config.type,
-          //     config.filterId,
-          //     config.htmlNodeName,
-          //     config.btnId
-          //   )
-          // );
-        }
+        // if (addFilterBtn) {
+        //   //check if btn has already declared onClick method;
+        //   // if (!!addFilterBtn.onclick) {
+        //   //   addFilterBtn.onclick = "";
+        //   // }
+        // }
       } else {
         wrapper.classList.remove("hidden");
 
-        if (addFilterBtn) {
-          // if (addFilterBtn && !addFilterBtn.hasAttribute("listenerOnClick"))
-          addFilterBtn.addEventListener("click", () =>
+        if (addFilterBtn && !addFilterBtn.onclick) {
+          addFilterBtn.onclick = () => {
             createFilters(
               config.type,
               config.filterId,
               config.htmlNodeName,
-              config.btnId
-            )
-          );
+              config.btnId,
+              config.fieldsetId
+            );
+          };
         }
       }
     });
@@ -521,3 +583,152 @@ const listenToMainCheckboxes = () => {
 };
 
 listenToMainCheckboxes();
+
+const checkboxesIdToFiltersIdDic = {
+  "green-chest-checkbox": "green-chest-filter",
+  "blue-chest-checkbox": "blue-chest-filter",
+  "gold-chest-checkbox": "gold-chest-filter",
+  "dungeons-checkbox": "dungeons-filter",
+  "leather-checkbox": "leather-filter",
+  "iron-checkbox": "iron-filter",
+  "stone-checkbox": "stone-filter",
+  "wood-checkbox": "wood-filter",
+  "flux-checkbox": "flux-filter",
+};
+
+const tiersIdToAmountsIdDic = {
+  "green-chest-tier": "green-chest-amount",
+  "blue-chest-tier": "blue-chest-amount",
+  "gold-chest-tier": "gold-chest-amount",
+  "dungeons-tier": "dungeons-amount",
+  "leather-tier": "leather-amount",
+  "iron-tier": "iron-amount",
+  "stone-tier": "stone-amount",
+  "wood-tier": "wood-amount",
+  "flux-tier": "flux-amount",
+};
+
+//to change values
+const errorMsgsDictionary = {
+  tier: "You cant look for the same tiers of the same thing in two different fields of the same fieldset",
+  amount: "There is no map in game with more than 7 spots of the same thing",
+};
+
+const validateFilters = () => {
+  const validation = {
+    result: "no-errors",
+    fieldsetsInfo: {
+      "green-chest-filter": {},
+      "blue-chest-filter": {},
+      "gold-chest-filter": {},
+      "dungeons-filter": {},
+      "leather-filter": {},
+      "iron-filter": {},
+      "stone-filter": {},
+      "wood-filter": {},
+      "flux-filter": {},
+    },
+  };
+
+  clearErrorMessages(validation.fieldsetsInfo);
+  const checkedFilters = [];
+  for (const [checkboxId, filterId] of Object.entries(
+    checkboxesIdToFiltersIdDic
+  )) {
+    const checkbox = document.getElementById(checkboxId);
+    checkbox.checked &&
+      checkedFilters.push({
+        checkbox,
+        filter: document.getElementById(filterId),
+      });
+  }
+  checkedFilters.length &&
+    checkedFilters.forEach((el) => {
+      const filterCategoryId = el.checkbox.id.split("-");
+      filterCategoryId.splice(-1);
+      const categoryId =
+        filterCategoryId.length > 1
+          ? filterCategoryId.join("-")
+          : filterCategoryId.toString();
+      const selectedTiers = [];
+      Array.from(el.filter.children).forEach((fieldsetRow) => {
+        if (fieldsetRow.id) {
+          const fieldsetRowId = fieldsetRow.id.split("-").splice(-1);
+          const tierValue = document.getElementById(
+            `${categoryId}-tier-${fieldsetRowId}`
+          ).value;
+          const amountValue = +document.getElementById(
+            `${categoryId}-amount-${fieldsetRowId}`
+          ).value;
+
+          if (selectedTiers.includes(tierValue)) {
+            //ERROR, TELL USER THAT YOU CANT HAVE THE SAME TIERS IN TWO DIFFERENT SELECTS.
+            console.log(
+              "You cant look for the same tiers of the same thing in two different fields"
+            );
+            validation.result = "error";
+            validation.fieldsetsInfo[el.filter.id]["tier"] =
+              errorMsgsDictionary.tier;
+          }
+          !selectedTiers.includes(tierValue) && selectedTiers.push(tierValue);
+          if (amountValue > 7) {
+            console.log(
+              "There is no map in game with more than 7 spots of the same thing"
+            );
+            validation.result = "error";
+            validation.fieldsetsInfo[el.filter.id]["amount"] =
+              errorMsgsDictionary.amount;
+          }
+        }
+      });
+    });
+
+  if (validation.result === "error") {
+    //create
+    createErrorMsg(validation.fieldsetsInfo);
+  }
+
+  if (!checkedFilters.length) validation.result = "no-filters";
+
+  console.log(validation);
+  return validation;
+};
+
+const clearErrorMessages = (fieldsetsObj) => {
+  Object.keys(fieldsetsObj).forEach((fieldsetId) => {
+    const fieldset = document.getElementById(fieldsetId);
+    Array.from(fieldset.children).forEach((children) => {
+      children.className.includes("error") && children.remove();
+      Array.from(fieldset.classList).includes("error-wrapper") &&
+        fieldset.classList.remove("error-wrapper");
+    });
+  });
+};
+
+const createErrorMsg = (fieldsetsObj) => {
+  for (const [fieldsetId, fieldsetError] of Object.entries(fieldsetsObj)) {
+    if (Object.keys(fieldsetError).length) {
+      const fieldset = document.getElementById(fieldsetId);
+      Object.values(fieldsetError).forEach((errorMsg, idx) => {
+        const errorText = document.createElement("p");
+        errorText.innerHTML = errorMsg;
+        errorText.className = `error-${idx}`;
+        fieldset.appendChild(errorText);
+        fieldset.classList.add("error-wrapper");
+      });
+    }
+  }
+};
+
+const searchBtn = document.getElementById("search__btn");
+// searchBtn.addEventListener("click", () => fetchAvaRoads());
+searchBtn.addEventListener("click", () => validateFilters());
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchBtn.click();
+  }
+});

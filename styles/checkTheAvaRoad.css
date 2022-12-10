@@ -313,10 +313,10 @@ label[for=stone-checkbox] img, label[for=wood-checkbox] img, label[for=flux-chec
 #gold-chest-checkbox:checked + label[for=gold-chest-checkbox] img,
 #dungeons-checkbox:checked + label[for=dungeons-checkbox] img,
 #leather-checkbox:checked + label[for=leather-checkbox] img,
-#leather-checkbox:checked + label[for=iron-checkbox] img,
-#leather-checkbox:checked + label[for=stone-checkbox] img,
-#leather-checkbox:checked + label[for=wood-checkbox] img,
-#leather-checkbox:checked + label[for=flux-checkbox] img {
+#iron-checkbox:checked + label[for=iron-checkbox] img,
+#stone-checkbox:checked + label[for=stone-checkbox] img,
+#wood-checkbox:checked + label[for=wood-checkbox] img,
+#flux-checkbox:checked + label[for=flux-checkbox] img {
   filter: grayscale(0);
 }
 
@@ -331,14 +331,19 @@ input.chest-amount {
 }
 
 .add-filter-btn {
-  padding: 0 5px;
-  height: 20px;
+  position: relative;
+  background: transparent;
+  border: 2px solid rgba(82, 14, 82, 0.95);
+  color: rgba(220, 55, 220, 0.95);
+  border-radius: 5px;
+  width: 40px;
+  height: 35px;
+  top: 10px;
 }
 
-.add-filter-btn.disabled {
-  background: rgba(80, 76, 76, 0.788);
-  color: #ffffff;
-  border: none;
+.add-filter-btn:hover {
+  background: rgba(82, 14, 82, 0.95);
+  cursor: pointer;
 }
 
 .add-filter-btn.disabled:hover {
@@ -346,7 +351,16 @@ input.chest-amount {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+}
+
+.error-wrapper {
+  border: 1px solid red;
+  padding: 10px 15px;
+}
+
+p[class*=error] {
+  color: red;
 }
 
 .result {
@@ -485,6 +499,9 @@ input.chest-amount {
   }
 }
 @media (max-width: 992px) {
+  .content {
+    width: 100%;
+  }
   .filters {
     display: flex;
     flex-direction: column;
