@@ -317,8 +317,18 @@ label[for='green-chest-checkbox'] img, label[for='blue-chest-checkbox'] img, lab
     padding: 0 10px;
 }
 
-input.chest-amount {
+.filters__chests--tier select, .filters__chests--amount input {
+    background: transparent;
+    border: 2px solid lighten($bgcolor, 15%);
+    color: white;
     text-align: center;
+    margin-top: 10px;
+    padding: 2.5px 0;
+    border-radius: 5px;
+}
+
+.filters__chests--tier select > option {
+    color: #000;
 }
 
 .add-filter-btn {
@@ -329,7 +339,8 @@ input.chest-amount {
     border-radius: 5px;
     width: 40px;
     height: 35px;
-    top: 10px;
+    top: 5px;
+    margin-left: 10px;
 }
 
 .add-filter-btn:hover {

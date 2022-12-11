@@ -130,183 +130,173 @@ const getClassNameForMapName = (searchResult) => {
 
 const createResults = (results) => {
   const searchResultsWrapper = document.getElementById("search-results");
-  results.forEach((el) => {
-    const resultWrapper = document.createElement("div");
-    resultWrapper.className = "result";
-    const mapThumbnail = document.createElement("img");
-    mapThumbnail.src = el.imgSrc;
-    mapThumbnail.alt = `${el.name} map`;
-    // TO REMOVE AFTER GETTING MAP IMAGES TO 360PX WITH GIMP
-    mapThumbnail.style.width = "360px";
+  results &&
+    results.forEach((el) => {
+      const resultWrapper = document.createElement("div");
+      resultWrapper.className = "result";
+      const mapThumbnail = document.createElement("img");
+      mapThumbnail.src = el.imgSrc;
+      mapThumbnail.alt = `${el.name} map`;
+      // TO REMOVE AFTER GETTING MAP IMAGES TO 360PX WITH GIMP
+      mapThumbnail.style.width = "360px";
 
-    resultWrapper.appendChild(mapThumbnail);
+      resultWrapper.appendChild(mapThumbnail);
 
-    const mapName = createMyElement("h4", getClassNameForMapName(el), el.name);
-    resultWrapper.appendChild(mapName);
-
-    const mapTier = createMyElement("h5", "", `Tier: ${el.mapTier}`);
-    resultWrapper.appendChild(mapTier);
-
-    const resultDetails = createMyElement("div", "result__details");
-
-    if (el.blueChests.length || el.greenChests.length || el.goldChests.length) {
-      const chestsParagraph = createMyElement("p", "", "Chests:");
-
-      resultDetails.appendChild(chestsParagraph);
-
-      const chestsDetails = createMyElement("div", "result__details--chests");
-
-      //green chest logic
-      if (el.greenChests.length) {
-        const greenChestDetails = createMyElement(
-          "div",
-          "result__details--green"
-        );
-        createColumnOfDifferentTierItems({
-          items: el.greenChests,
-          divClassName: "chest-info",
-          amountSpanClassName: "green-chest",
-          tierSpanClassName: "green-chest__tier",
-          wrapper: greenChestDetails,
-        });
-
-        chestsDetails.appendChild(greenChestDetails);
-      }
-
-      //blue chest logic
-      if (el.blueChests.length) {
-        const blueChestDetails = createMyElement(
-          "div",
-          "result__details--blue"
-        );
-        createColumnOfDifferentTierItems({
-          items: el.blueChests,
-          divClassName: "chest-info",
-          amountSpanClassName: "blue-chest",
-          tierSpanClassName: "blue-chest__tier",
-          wrapper: blueChestDetails,
-        });
-
-        chestsDetails.appendChild(blueChestDetails);
-      }
-
-      //gold chest logic
-      if (el.goldChests.length) {
-        const goldChestDetails = createMyElement(
-          "div",
-          "result__details--gold"
-        );
-        createColumnOfDifferentTierItems({
-          items: el.goldChests,
-          divClassName: "chest-info",
-          amountSpanClassName: "gold-chest",
-          tierSpanClassName: "gold-chest__tier",
-          wrapper: goldChestDetails,
-        });
-
-        chestsDetails.appendChild(goldChestDetails);
-      }
-
-      resultDetails.appendChild(chestsDetails);
-    }
-
-    if (el.dungeons.length) {
-      const dungeonsParagraph = document.createElement("p");
-      dungeonsParagraph.innerHTML = "Dungeons:";
-      resultDetails.appendChild(dungeonsParagraph);
-
-      const dungeonsDetails = document.createElement("div");
-      dungeonsDetails.className = "result__details--dungeons";
-
-      el.dungeons.forEach((dungeon) => {
-        const dungeonInfo = document.createElement("div");
-        dungeonInfo.className = "dungeon-info";
-
-        const dungeonAmount = document.createElement("span");
-        dungeonAmount.className = "dungeon";
-        dungeonAmount.innerHTML = `${dungeon.amount}x `;
-
-        dungeonInfo.appendChild(dungeonAmount);
-
-        const dungeonTier = document.createElement("span");
-        dungeonTier.className = "dungeon__tier";
-        dungeonTier.innerHTML = dungeon.tier;
-
-        dungeonInfo.appendChild(dungeonTier);
-        dungeonsDetails.appendChild(dungeonInfo);
-      });
-
-      resultDetails.appendChild(dungeonsDetails);
-    }
-
-    if (el.ironGatheringSpots || el.leatherGatheringSpots) {
-      const gatheringSpotsParagraph = createMyElement(
-        "p",
-        "",
-        "Gathering spots:"
+      const mapName = createMyElement(
+        "h4",
+        getClassNameForMapName(el),
+        el.name
       );
-      resultDetails.appendChild(gatheringSpotsParagraph);
+      resultWrapper.appendChild(mapName);
 
-      const gatheringSpotsWrapper = createMyElement(
-        "div",
-        "result__details--gatheringspots"
-      );
+      const mapTier = createMyElement("h5", "", `Tier: ${el.mapTier}`);
+      resultWrapper.appendChild(mapTier);
 
-      if (el.leatherGatheringSpots) {
-        const leatherWrapper = createMyElement(
-          "div",
-          "result_details--leather"
+      const resultDetails = createMyElement("div", "result__details");
+
+      if (
+        el.blueChests.length ||
+        el.greenChests.length ||
+        el.goldChests.length
+      ) {
+        const chestsParagraph = createMyElement("p", "", "Chests:");
+
+        resultDetails.appendChild(chestsParagraph);
+
+        const chestsDetails = createMyElement("div", "result__details--chests");
+
+        //green chest logic
+        if (el.greenChests.length) {
+          const greenChestDetails = createMyElement(
+            "div",
+            "result__details--green"
+          );
+          createColumnOfDifferentTierItems({
+            items: el.greenChests,
+            divClassName: "chest-info",
+            amountSpanClassName: "green-chest",
+            tierSpanClassName: "green-chest__tier",
+            wrapper: greenChestDetails,
+          });
+
+          chestsDetails.appendChild(greenChestDetails);
+        }
+
+        //blue chest logic
+        if (el.blueChests.length) {
+          const blueChestDetails = createMyElement(
+            "div",
+            "result__details--blue"
+          );
+          createColumnOfDifferentTierItems({
+            items: el.blueChests,
+            divClassName: "chest-info",
+            amountSpanClassName: "blue-chest",
+            tierSpanClassName: "blue-chest__tier",
+            wrapper: blueChestDetails,
+          });
+
+          chestsDetails.appendChild(blueChestDetails);
+        }
+
+        //gold chest logic
+        if (el.goldChests.length) {
+          const goldChestDetails = createMyElement(
+            "div",
+            "result__details--gold"
+          );
+          createColumnOfDifferentTierItems({
+            items: el.goldChests,
+            divClassName: "chest-info",
+            amountSpanClassName: "gold-chest",
+            tierSpanClassName: "gold-chest__tier",
+            wrapper: goldChestDetails,
+          });
+
+          chestsDetails.appendChild(goldChestDetails);
+        }
+
+        resultDetails.appendChild(chestsDetails);
+      }
+
+      if (el.dungeons.length) {
+        const dungeonsParagraph = document.createElement("p");
+        dungeonsParagraph.innerHTML = "Dungeons:";
+        resultDetails.appendChild(dungeonsParagraph);
+
+        const dungeonsDetails = document.createElement("div");
+        dungeonsDetails.className = "result__details--dungeons";
+
+        el.dungeons.forEach((dungeon) => {
+          const dungeonInfo = document.createElement("div");
+          dungeonInfo.className = "dungeon-info";
+
+          const dungeonAmount = document.createElement("span");
+          dungeonAmount.className = "dungeon";
+          dungeonAmount.innerHTML = `${dungeon.amount}x `;
+
+          dungeonInfo.appendChild(dungeonAmount);
+
+          const dungeonTier = document.createElement("span");
+          dungeonTier.className = "dungeon__tier";
+          dungeonTier.innerHTML = dungeon.tier;
+
+          dungeonInfo.appendChild(dungeonTier);
+          dungeonsDetails.appendChild(dungeonInfo);
+        });
+
+        resultDetails.appendChild(dungeonsDetails);
+      }
+
+      if (el.ironGatheringSpots || el.leatherGatheringSpots) {
+        const gatheringSpotsParagraph = createMyElement(
+          "p",
+          "",
+          "Gathering spots:"
         );
-        createColumnOfDifferentTierItems({
-          items: el.leatherGatheringSpots,
-          divClassName: "gatheringspot-info",
-          amountSpanClassName: "gatheringspot--leather",
-          tierSpanClassName: "gatheringspot__tier",
-          wrapper: leatherWrapper,
-        });
+        resultDetails.appendChild(gatheringSpotsParagraph);
 
-        gatheringSpotsWrapper.appendChild(leatherWrapper);
+        const gatheringSpotsWrapper = createMyElement(
+          "div",
+          "result__details--gatheringspots"
+        );
+
+        if (el.leatherGatheringSpots) {
+          const leatherWrapper = createMyElement(
+            "div",
+            "result_details--leather"
+          );
+          createColumnOfDifferentTierItems({
+            items: el.leatherGatheringSpots,
+            divClassName: "gatheringspot-info",
+            amountSpanClassName: "gatheringspot--leather",
+            tierSpanClassName: "gatheringspot__tier",
+            wrapper: leatherWrapper,
+          });
+
+          gatheringSpotsWrapper.appendChild(leatherWrapper);
+        }
+
+        if (el.ironGatheringSpots) {
+          const ironWrapper = createMyElement("div", "result_details--iron");
+
+          createColumnOfDifferentTierItems({
+            items: el.ironGatheringSpots,
+            divClassName: "gatheringspot-info",
+            amountSpanClassName: "gatheringspot--iron",
+            tierSpanClassName: "gatheringspot__tier",
+            wrapper: ironWrapper,
+          });
+
+          gatheringSpotsWrapper.appendChild(ironWrapper);
+        }
+        resultDetails.appendChild(gatheringSpotsWrapper);
       }
 
-      if (el.ironGatheringSpots) {
-        const ironWrapper = createMyElement("div", "result_details--iron");
-
-        createColumnOfDifferentTierItems({
-          items: el.ironGatheringSpots,
-          divClassName: "gatheringspot-info",
-          amountSpanClassName: "gatheringspot--iron",
-          tierSpanClassName: "gatheringspot__tier",
-          wrapper: ironWrapper,
-        });
-
-        gatheringSpotsWrapper.appendChild(ironWrapper);
-      }
-      resultDetails.appendChild(gatheringSpotsWrapper);
-    }
-
-    resultWrapper.appendChild(resultDetails);
-    searchResultsWrapper.appendChild(resultWrapper);
-  });
+      resultWrapper.appendChild(resultDetails);
+      searchResultsWrapper.appendChild(resultWrapper);
+    });
 };
-
-const fetchAvaRoads = () => {
-  const searchInput = document
-    .getElementById("searchInput")
-    .value.toLowerCase();
-
-  const resultsShown = document.getElementsByClassName("result");
-  if (resultsShown.length > 0) {
-    Array.from(resultsShown).forEach((resultShown) => resultShown.remove());
-  }
-  const results = searchInput
-    ? AVA_ROADS.filter((avaRoad) =>
-        avaRoad.name.toLowerCase().includes(searchInput)
-      )
-    : AVA_ROADS;
-
-  createResults(results);
-};
-fetchAvaRoads();
 
 //filters
 
@@ -720,13 +710,131 @@ const createErrorMsg = (fieldsetsObj) => {
   }
 };
 
+const fetchAvaRoads = () => {
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.toLowerCase();
+  let results;
+
+  const isValidated = validateFilters();
+
+  if (isValidated.result !== "error") {
+    const resultsShown = document.getElementsByClassName("result");
+    if (resultsShown.length > 0) {
+      Array.from(resultsShown).forEach((resultShown) => resultShown.remove());
+    }
+    results = searchInput
+      ? AVA_ROADS.filter((avaRoad) =>
+          avaRoad.name.toLowerCase().includes(searchInput)
+        )
+      : AVA_ROADS;
+
+    // switch(isValidated.result){
+    //   case 'no-filters':
+    //   results = searchInput
+    //   ? AVA_ROADS.filter((avaRoad) =>
+    //       avaRoad.name.toLowerCase().includes(searchInput)
+    //     )
+    //   : AVA_ROADS;
+    //   break;
+    //   case 'no-errors':
+    //     results = getFilteredResults();
+    if (isValidated.result === "no-errors") {
+      results = getFilteredResults();
+    }
+
+    // if filters are applied
+
+    createResults(results);
+  }
+};
+fetchAvaRoads();
+
+const filterDictionary = {
+  "green-chest": "greenChests",
+  "blue-chest": "blueChests",
+  "gold-chest": "goldChests",
+  dungeons: "dungeons",
+  leather: "leatherGatheringSpots",
+  iron: "ironGatheringSpots",
+  wood: "woodGatheringSpots",
+  stone: "stoneGatheringSpots",
+  flux: "fluxGatheringSpots",
+};
+
+const getFilteredResults = (searchValue) => {
+  const filters = document.querySelectorAll(`input[id*="checkbox"]`);
+  const appliedFilters = Array.from(filters).filter((filter) => filter.checked);
+  const filtersValue = {};
+  //get data from checked filters/inputted data in filters
+  appliedFilters.forEach((appliedFilter) => {
+    const appliedFilterId = appliedFilter.id.split("-");
+    appliedFilterId.splice(-1);
+    const categoryId = appliedFilterId.join("-");
+    const filterfieldsetId = `${categoryId}-filter`;
+    const tierId = `${categoryId}-tier`;
+    const amountId = `${categoryId}-amount`;
+    const filterFieldset = document.getElementById(filterfieldsetId);
+    Array.from(filterFieldset.children).forEach((fieldset, idx) => {
+      const fieldsetId = fieldset.id.split("-").splice(-1);
+      const tierValue = document.getElementById(
+        `${tierId}-${fieldsetId}`
+      ).value;
+      const amountValue = document.getElementById(
+        `${amountId}-${fieldsetId}`
+      ).value;
+      filtersValue[categoryId] = {
+        ...filtersValue[categoryId],
+        [idx]: {
+          amount: +amountValue,
+          tier: tierValue,
+        },
+      };
+    });
+  });
+
+  //compare AVA_ROADS with data from filters
+  const avaRoads = searchValue
+    ? AVA_ROADS.filter((avaRoad) =>
+        avaRoad.name.toLowerCase().includes(searchInput)
+      )
+    : AVA_ROADS;
+
+  const filteredRoads = [];
+  avaRoads.forEach((avaRoad) => {
+    const doesValueExistArr = [];
+    for (const [filterKey, filterValue] of Object.entries(filtersValue)) {
+      if (avaRoad[filterDictionary[filterKey]]) {
+        const filterValArr = Object.values(filterValue);
+        if (filterValArr.length > avaRoad[filterDictionary[filterKey]].length) {
+          doesValueExistArr.push(false);
+          return;
+        }
+        filterValArr.forEach((filterVal) => {
+          const doesNodeExist = avaRoad[filterDictionary[filterKey]].find(
+            (avaNode) => avaNode.tier === filterVal.tier
+          );
+          if (!doesNodeExist) doesValueExistArr.push(false);
+          if (doesNodeExist) {
+            if (filterVal.amount > doesNodeExist.amount) {
+              doesValueExistArr.push(false);
+            }
+          }
+        });
+      }
+    }
+    if (!doesValueExistArr.includes(false)) filteredRoads.push(avaRoad);
+  });
+
+  return filteredRoads;
+};
+
 const searchBtn = document.getElementById("search__btn");
-// searchBtn.addEventListener("click", () => fetchAvaRoads());
-searchBtn.addEventListener("click", () => validateFilters());
+searchBtn.addEventListener("click", () => fetchAvaRoads());
 
-const searchInput = document.getElementById("searchInput");
+// const searchInput = document.getElementById("searchInput");
 
-searchInput.addEventListener("keypress", (e) => {
+document.querySelector("body").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     searchBtn.click();

@@ -5,14 +5,6 @@ export const createMyElement = (element, className, innerHTML) => {
   return myElement;
 };
 
-// const obj = {
-//   items: greenChests,
-//   divClassName: "chest-info",
-//   amountSpanClassName: "green-chest",
-//   tierSpanClassName: "green-chest__tier",
-//   wrapper: greenChestDetails,
-// };
-
 export const createColumnOfDifferentTierItems = (payload) => {
   payload.items.forEach((item) => {
     const wrapper = createMyElement("div", payload.divClassName);

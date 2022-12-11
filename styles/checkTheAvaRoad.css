@@ -326,8 +326,18 @@ label[for=stone-checkbox] img, label[for=wood-checkbox] img, label[for=flux-chec
   padding: 0 10px;
 }
 
-input.chest-amount {
+.filters__chests--tier select, .filters__chests--amount input {
+  background: transparent;
+  border: 2px solid rgba(82, 14, 82, 0.95);
+  color: white;
   text-align: center;
+  margin-top: 10px;
+  padding: 2.5px 0;
+  border-radius: 5px;
+}
+
+.filters__chests--tier select > option {
+  color: #000;
 }
 
 .add-filter-btn {
@@ -338,7 +348,8 @@ input.chest-amount {
   border-radius: 5px;
   width: 40px;
   height: 35px;
-  top: 10px;
+  top: 5px;
+  margin-left: 10px;
 }
 
 .add-filter-btn:hover {
