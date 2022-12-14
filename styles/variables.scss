@@ -5,7 +5,19 @@ $bgcolor-footer: rgb(10, 2, 10);
 $font-color-default: #ffffff;
 $font-color-default-hover: #ffffff4b;
 $font-color-dark: #000000;
+$green-chest-color: rgb(12, 160, 12);
+$blue-chest-color: rgb(41, 69, 231);
+$gold-chest-color: rgb(247, 210, 0);
+$dungeon-color: rgb(71, 206, 188);
+$gathering-spot-color: rgb(104, 41, 33);
 
+$font-family: 'Barlow', sans-serif;
+
+//custom breakpoints
+$ctar-lg-breakpoint: 1800px;
+$lg-breakpoint: 992px;
+$sm-breakpoint: 576px;
+$md-breakpoint: 768px;
 //spacing unit
 $spacing-unit: 10px;
 
@@ -21,13 +33,13 @@ $font-size-huge: 42px;
 $font-size-huge-mobile: 30px;
 
 @mixin font-headline {
-    font-family: 'Barlow', sans-serif;
+    font-family: $font-family;
     font-weight: 500;
     color: #ffffff;
 }
 
 @mixin font-normal {
-    font-family: 'Barlow', sans-serif;
+    font-family: $font-family;
     font-weight: 100;
     color: #ffffff;
 }

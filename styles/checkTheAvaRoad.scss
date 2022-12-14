@@ -1,0 +1,715 @@
+@use '../styles/variables.scss' as *;
+
+.navbar__list li {
+    font-size: 28px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    .preload {
+        z-index:3;
+        height: 100vh;
+        background-color: $bgcolor-loader;
+
+        .preload-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 2;
+            height: 80px;
+            transform: translate(-50%, 0%);
+            margin-top: -50px;
+        }
+    .spinner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        margin: auto;
+        box-sizing: border-box;
+        background-clip: padding-box;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%);
+        transform-origin: 50% 60%;
+        transform: perspective(200px) rotateX(80deg);
+        animation: spinner-wiggle 1.2s infinite;
+        margin-top: -100px;
+    margin-left: -100px;
+      }
+      .spinner:before,
+      .spinner:after {
+        content: "";
+        position: absolute;
+        margin: -4px;
+        box-sizing: inherit;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        opacity: .05;
+        border: inherit;
+        border-color: transparent;
+        animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+      }
+      
+      .spinner:before {
+        border-top-color: red;
+      }
+      
+      .spinner:after {
+        border-top-color: red;
+        animation-delay: 0.3s;
+      }
+      
+      @keyframes spinner-spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner-fade {
+        20% {
+          opacity: .1;
+        }
+        40% {
+          opacity: 1;
+        }
+        60% {
+          opacity: .1;
+        }
+      }
+    }
+
+body::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    transform: translateZ(0);
+    z-index: -1;
+    background-image: url(../images/thomas-and-friends-bg.png);
+}
+
+.content {
+    position: relative;
+    min-height: 100vh;
+    width: 70%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    background-color: $bgcolor;
+
+    
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    @include font-normal;
+    text-align: center;
+    font-size: $font-size-tiny;
+    background-color: $bgcolor-footer;
+    margin-top: $spacing-unit * 4;
+}
+
+.navbar {
+    @include font-normal;
+    position: fixed;
+    background-color: $bgcolor;
+    height: 60px;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+    display: flex;
+}
+
+.navbar__wrapper {
+    display: flex;
+    width: 70%;
+    margin: auto;
+    justify-content: center;
+}
+
+.navbar__logo {
+    height: 60px;
+    cursor: pointer;
+}
+
+.navbar__logo:hover {
+    animation: pulse 1s infinite;
+    animation-timing-function: linear; 
+}
+
+.navbar__list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    
+}
+
+//search tool
+#tool {
+    display: flex;
+    flex-direction: column;
+    max-width: 1300px;
+    margin:60px auto 0;
+}
+
+#tool h3 {
+    @include font-headline;
+    font-size: 18px;
+    margin: 40px auto 0;
+    text-align: center;
+}
+
+
+//legend part
+.legend {
+    color: $font-color-default;
+    text-align: center;
+    margin-top: 20px;
+    font-family: $font-family;
+}
+.legend .items {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 20px auto;
+}
+
+.legend .item {
+    display: flex;
+    align-items: center;
+} 
+
+
+.item span {
+    padding-left: 5px;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+}
+
+.green-chest-color .square {
+    background: $green-chest-color;
+}
+
+.blue-chest-color .square {
+    background: $blue-chest-color;
+}
+
+.gold-chest-color .square {
+    background: $gold-chest-color;
+}
+.dungeon-color .square {
+    background: $dungeon-color;
+}
+
+.gathering-spot-color .square {
+    background: $gathering-spot-color;
+}
+
+//filter cmp
+.search__results {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.search__component {
+    margin: 30px auto;
+    // background: rgb(108, 23, 156);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search__component input {
+    width: 400px;
+    padding: 10px 0;
+    margin: 0 15px;
+    text-align: center;
+    border-radius: 7.5px;
+    border: none;
+}
+
+.search__component--basic-controls, .search__component--additional-controls {
+    display: flex;
+}
+
+.search__btn, .clear__filters--btn, .hide-filters-btn {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lighten($bgcolor, 15%);
+    font-family: $font-family;
+    background: transparent;
+    color: #eee;
+    position: relative;
+}
+.clear__filters--btn {
+    margin-left: 10px;
+    padding: 0 25px 0 10px;
+}
+
+.hide-filters-btn {
+margin-left: 10px;
+}
+
+.search__btn:hover, .clear__filters--btn:hover, .hide-filters-btn:hover {
+    cursor: pointer;
+}
+
+.clear__filters--btn::after {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    content: url('../images/icons/filter-svgrepo-com.svg');
+    margin-left: 2.5px;
+}
+
+
+//filters
+
+.filters {
+    background-color: lighten($bgcolor, 3.5%);
+    display: flex;
+    flex-direction: column;
+    color: $font-color-default;
+    font-family: $font-family;
+    margin-bottom: 50px;
+}
+
+.filters p {
+    padding-top: 10px;
+}
+
+.filters__tabs {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    width: 100%;
+    text-align: center;
+}
+
+.filters__tabs:hover {
+    cursor: pointer;
+}
+
+.filters__tab--chests, .filters__tab--dungeons, .filters__tab--gatheringspots {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    color: lighten($bgcolor, 25%);
+    letter-spacing: 0.75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filters__tab--chests, .filters__tab--gatheringspots {
+    border: 2px solid lighten($bgcolor, 15%);
+}
+
+.filters__tab--dungeons {
+    border-top: 2px solid lighten($bgcolor, 15%);
+    border-bottom: 2px solid lighten($bgcolor, 15%);;
+}
+
+.filters__options {
+    display: flex;
+    min-height: 380px;
+}
+
+.filters__options p {
+    padding: 0 0 10px 0;
+}
+
+.category-name, .tab-exclamation {
+    position: relative;
+}
+
+.category-exclamation::after, .tab-exclamation::after {
+    content: url('../images/icons/exclamation-mark-svgrepo-com.svg');
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.category-exclamation::after {
+    top: -10px;
+}
+
+.tab-exclamation::after {
+    right: 5px;
+    top: 5px;
+}
+
+
+.filters__chests, .filters__dungeons, .filters__gatheringspots {
+    min-width: 100%;
+    padding-top: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.filters__chests--chest {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 12.5px;
+
+    // margin: auto;
+}
+
+.filters__chests--green, .filters__chests--blue, .filters__chests--gold, .filters__dungeons--holder {
+    width: 33.3%;
+}
+
+.filters__gathering-spots--leather, .filters__gathering-spots--iron, .filters__gathering-spots--stone, .filters__gathering-spots--wood, .filters__gathering-spots--flux {
+    width: 20%;
+}
+
+
+//icon checkboxes
+#green-chest-checkbox, #blue-chest-checkbox, #gold-chest-checkbox, #dungeons-checkbox, #leather-checkbox,
+ #iron-checkbox, #stone-checkbox, #wood-checkbox, #flux-checkbox {
+    display: none;
+}
+
+label[for='green-chest-checkbox'] img, label[for='blue-chest-checkbox'] img, label[for='gold-chest-checkbox'] img,
+ label[for='dungeons-checkbox'] img, label[for='leather-checkbox'] img, label[for='iron-checkbox'] img,
+ label[for='stone-checkbox'] img, label[for='wood-checkbox'] img, label[for='flux-checkbox'] img    {
+    height: 50px;
+    width: 50px;
+    filter: grayscale(100%);
+}
+
+#green-chest-checkbox:checked + label[for='green-chest-checkbox'] img, 
+#blue-chest-checkbox:checked + label[for='blue-chest-checkbox'] img,
+#gold-chest-checkbox:checked + label[for='gold-chest-checkbox'] img,
+#dungeons-checkbox:checked + label[for='dungeons-checkbox'] img,
+#leather-checkbox:checked + label[for='leather-checkbox'] img,
+#iron-checkbox:checked + label[for='iron-checkbox'] img,
+#stone-checkbox:checked + label[for='stone-checkbox'] img,
+#wood-checkbox:checked + label[for='wood-checkbox'] img,
+#flux-checkbox:checked + label[for='flux-checkbox'] img  {
+    filter: grayscale(0);
+}
+
+.filters__chests--tier, .filters__chests--amount {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.filters__chests--tier select, .filters__chests--amount input {
+    background: transparent;
+    border: 2px solid lighten($bgcolor, 15%);
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    padding: 2.5px 0;
+    border-radius: 5px;
+}
+
+.filters__chests--tier select > option {
+    color: #000;
+}
+
+.add-filter-btn {
+    position: relative;
+    background: transparent;
+    border: 2px solid lighten($bgcolor, 15%);
+    color: lighten($bgcolor, 50%);
+    border-radius: 5px;
+    width: 40px;
+    height: 35px;
+    top: 5px;
+    margin-left: 10px;
+}
+
+.add-filter-btn:hover {
+    background: lighten($bgcolor, 15%);
+    cursor: pointer;
+}
+
+.add-filter-btn.disabled:hover {
+    cursor: not-allowed;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.error-wrapper {
+    border: 1px solid red;
+    padding: 10px 15px;
+}
+
+p[class*='error'] {
+    color: red;
+};
+
+.covered {
+    display: none;
+}
+
+.show {
+    opacity: 1;
+}
+
+.show-animated {
+    opacity: 1;
+    overflow: hidden;
+    animation: slide-out 1s ease forwards;
+}
+
+.covered-animated {
+    max-height: 0;
+    overflow: hidden;
+    animation: slide-in 1s ease forwards;
+}
+
+
+.active {
+    background:lighten($bgcolor, 7.5%);
+}
+
+@keyframes slide-in {
+    from {max-height: 2200px;}
+    to {max-height: 0px;}
+}
+
+@keyframes slide-out {
+    from {max-height: 0px;}
+    to {max-height: 2200px;}
+}
+
+
+
+.result {
+    @include font-headline;
+    max-width: 360px;
+    margin: 10px 30px 40px;
+    background-color: lighten($bgcolor, 3.5%);
+    border-radius: 15px;
+}
+
+.results-not-found {
+    position: relative;
+    color: #fff;
+    font-family: $font-family;
+    text-align: center;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.results-not-found::after {
+    position: absolute;
+    content: url('../images/icons/sad-emoticon.svg');
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    top: 120px;
+}
+
+
+
+.result img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.result h4 {
+    font-size: 18px;
+    padding: 5px 0;
+}
+
+.green-chest-color {
+    color: $green-chest-color;
+}
+
+.blue-chest-color {
+    color: $blue-chest-color;
+}
+
+.gold-chest-color {
+    color: $gold-chest-color;
+}
+
+.dungeon-color {
+    color:$dungeon-color;
+}
+
+.gathering-spot-color {
+color: $gathering-spot-color;
+}
+
+.result h4, .result h5, .result p {
+    text-align: center;
+}
+.result__details p {
+    border-top: 1px solid lighten($bgcolor, 17.5%);
+    margin-top: 10px;
+    padding: 10px 0;
+}
+
+.result__details--chests, .result__details--gatheringspots {
+    display: flex;
+    justify-content: space-around;
+}
+
+.result__details--green, .result__details--blue, .result__details--gold, .result_details--leather, .result_details--iron {
+    display: flex;
+    flex-direction: column;
+}
+
+.chest-info {
+    text-align: center;
+}
+
+.result__details--dungeons {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.result__details--gatheringspots {
+    margin-bottom: 20px;
+}
+
+.green-chest::before, .blue-chest::before, .gold-chest::before, .dungeon::before, .gatheringspot--leather::before,.gatheringspot--iron::before  {
+    background-size: 40px;
+    display: inline-block;
+    width: 40px; 
+    height: 32.5px;
+    content:"";
+    margin-right: 5px;
+}
+
+.green-chest::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/greenchest.png');
+}
+
+.blue-chest::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/bluechest.png');
+}
+
+.gold-chest::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/goldenchest.png');
+}
+
+
+.dungeon::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/dung.png');
+}
+
+.gatheringspot--leather::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/dung.png');
+}
+
+.gatheringspot--iron::before {
+    background-image: url('../images/icons/checkTheAvaRoadTool/result-icons/dung.png');
+}
+
+
+
+
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+
+  @media(max-width: $ctar-lg-breakpoint) {
+    .search__results {
+        justify-content: center;
+    }
+  }
+
+
+// @media (max-width: 1200px) {
+ 
+//   }
+
+@media (max-width: $lg-breakpoint) {
+    .content {
+        width: 100%;
+    }
+    .filters {
+        display: flex;
+        flex-direction: column;
+    }
+    .filters__chests {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .filters__dungeons  {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .filters__gatheringspots {
+        flex-direction: column;
+        align-items: center;
+    }
+    .filters__gathering-spots--leather, .filters__gathering-spots--iron, .filters__gathering-spots--stone, .filters__gathering-spots--wood, .filters__gathering-spots--flux {
+        width: 100%;
+    }
+    .filters__chests--gold, .filters__dungeons--wrapper {
+        border-bottom: 1px solid lighten($bgcolor, 17.5%);
+        padding-bottom: 10px;
+    }
+}
+
+
+@media(max-width: $md-breakpoint) {
+    .search__component {
+        flex-direction: column;
+    }
+    .search__component input {
+        width: 75%;
+    }
+    .search__component--additional-controls {
+        width: 95%;
+        margin: 15px auto 0;
+    }
+    .search__component--additional-controls button {
+        width: 50%;
+    }
+}
+
+
+@media (max-width: $sm-breakpoint) {
+    .legend .items {
+    flex-direction: column;
+    align-items: center;
+    }
+    .filters__tabs {
+        font-size: 18px;
+    }
+    .filters__tab--chests, .filters__tab--dungeons, .filters__tab--gatheringspots {
+        padding: 10px;
+    }
+}

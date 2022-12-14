@@ -61,12 +61,12 @@ const setVisible = (elementOrSelector, visible) =>
 setVisible(".content", false);
 setVisible("#loading", true);
 
-document.addEventListener("DOMContentLoaded", () =>
+document.addEventListener("DOMContentLoaded", () => {
   wait(1200).then(() => {
     setVisible(".content", true);
     setVisible("#loading", false);
-  })
-);
+  });
+});
 
 const showLightbox = (id, title) => {
   const video = $(`iframe[id='${id}']`);
@@ -140,18 +140,11 @@ const getVideos = () => {
   });
 };
 
-if (
-  document.readyState === "interactive" ||
-  document.readyState === "complete"
-) {
-  getCrewMembers();
-  getVideos();
-  document
-    .getElementById("lightbox")
-    .addEventListener("click", closeLightbox());
-  //global methods
-  window.handleMobileNav = handleMobileNav;
-  window.copyToClipboard = copyToClipboard;
-  window.moveToSection = moveToSection;
-  window.closeLightbox = closeLightbox;
-}
+getCrewMembers();
+getVideos();
+document.getElementById("lightbox").addEventListener("click", closeLightbox());
+//global methods
+window.handleMobileNav = handleMobileNav;
+window.copyToClipboard = copyToClipboard;
+window.moveToSection = moveToSection;
+window.closeLightbox = closeLightbox;
