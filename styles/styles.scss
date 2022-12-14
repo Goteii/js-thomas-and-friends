@@ -262,7 +262,7 @@ body::after {
                     width: 50%;
                     height: 100vh;
                     background: $bgcolor-loader;
-                    z-index: 10;
+                    z-index: 3;
                     color: black;
                     display: grid;
                     justify-items: center;
