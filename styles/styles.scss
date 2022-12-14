@@ -259,10 +259,10 @@ body::after {
                     position: absolute;
                     top: 0px;
                     right: 0px;
-                    width: 30vh;
+                    width: 50%;
                     height: 100vh;
                     background: $bgcolor-loader;
-                    z-index: 3;
+                    z-index: 10;
                     color: black;
                     display: grid;
                     justify-items: center;
@@ -579,12 +579,23 @@ body::after {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $lg-breakpoint) {
     .content {
         width: 100%;
         .navbar {
-            .navbar__wrapper {
-            width: 100%;
+            display: none;
+        }
+        .navbar-mobile {
+            display: flex;
+        }
+        &__banner {
+            .banner__info {
+                .banner__headline {
+                    font-size: $font-size-huge-mobile;
+                }
+                .banner__container {
+                    width: 60%;
+                }
             }
         }
         &__banner {

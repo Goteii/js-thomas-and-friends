@@ -717,6 +717,13 @@ p[class*=error] {
     border-bottom: 1px solid rgba(93, 16, 93, 0.95);
     padding-bottom: 10px;
   }
+  .covered {
+    display: none;
+  }
+  .search__results {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 @media (max-width: 768px) {
   .search__component {
