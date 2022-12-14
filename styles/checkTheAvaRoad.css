@@ -751,4 +751,7 @@ p[class*=error] {
   .filters__tab--chests, .filters__tab--dungeons, .filters__tab--gatheringspots {
     padding: 10px;
   }
+  .result {
+    margin: 10px 0 40px;
+  }
 }/*# sourceMappingURL=checkTheAvaRoad.css.map */

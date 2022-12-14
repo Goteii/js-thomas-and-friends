@@ -272,6 +272,10 @@ body::after {
                     transform: translateX(100%);
                     transition: all 0.5s ease-in;
 
+                    li {
+                        text-align: center;
+                    }
+
                     .navbar__link {
                         @include font-normal;
                         color: $font-color-default;
