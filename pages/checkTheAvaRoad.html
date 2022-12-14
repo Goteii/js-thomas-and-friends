@@ -35,44 +35,57 @@
             
             <section id="tool">
                 <h3>CheckTheAvaRoad Tool allows you to check every road you want! You can find how many camps,dungeons,gathering spots are in there and what tier they are!</h3>
-              <div class="legend" id="legend">
+                <div class="legend" id="legend">
                 <p>Legend for map color which indicates what dominates on map:</p>
-                <div class="items">
+                   
+                    <div class="items">
+                        <div class="item green-chest-color">
+                            <div class="square"></div>
+                            <span>Green Chests</span>
+                        </div>
+                        <div class="item blue-chest-color">
+                            <div class="square"></div>
+                            <span>Blue Chests</span>
+                        </div>
+                        <div class="item gold-chest-color">
+                            <div class="square"></div>
+                            <span>Gold Chests</span>
+                        </div>
+                        <div class="item dungeon-color">
+                            <div class="square"></div>
+                            <span>Dungeons</span>
+                        </div>
+                        <div class="item gathering-spot-color">
+                            <div class="square"></div>
+                            <span>Gathering Spots</span>
+                        </div>
+                    </div>
 
-              
-                <div class="item green-chest-color">
-                    <div class="square"></div>
-                    <span>Green Chests</span>
                 </div>
-                <div class="item blue-chest-color">
-                    <div class="square"></div>
-                    <span>Blue Chests</span>
-                </div>
-                <div class="item gold-chest-color">
-                    <div class="square"></div>
-                    <span>Gold Chests</span>
-                </div>
-                <div class="item dungeon-color">
-                    <div class="square"></div>
-                    <span>Dungeons</span>
-                </div>
-                <div class="item gathering-spot-color">
-                    <div class="square"></div>
-                    <span>Gathering Spots</span>
-                </div>
-              </div>
-            </div>
 
 
                 <div class="search__component">
+                    <div class="search__component--basic-controls">
                 <input id="searchInput" name="searchInput" maxlength="25"/>
                 <button type="submit" class="search__btn" id="search__btn">Search</button>
             </div>
-                <div class="filters">
-                    <!-- add filters, checkboxes -->
-                    <div class="filters__chests">
-                        <p>Chests:</p>
+            <div class="search__component--additional-controls">
+
+                <button class="clear__filters--btn" id="clear-filters">Clear filters</button>
+                <button class="hide-filters-btn" id="hide-filters">Show filters</button>
+            </div>
+            </div>
+                <div class="filters covered covered-animated" id="filters">
+                    <div class="filters__tabs">
+                        <div class="filters__tab--chests tab-exclamation" id="filters-option-chests-tab">Chests</div>
+                        <div class="filters__tab--dungeons" id="filters-option-dungeons-tab">Dungeons</div>
+                        <div class="filters__tab--gatheringspots" id="filters-option-gatheringspots-tab">Gathering Spots</div>
+                    </div>
+                    <div class="filters__options">
+               
+                    <div class="filters__chests" id="filters-option-chests">
                         <div class="filters__chests--green">
+                            <p class="category-name category-exclamation" id="category-name-green-chests">Green Chests</p>
                             <input type="checkbox" name="green-chest" value="green-chest" id="green-chest-checkbox"/> 
                             <label for="green-chest-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/greenchest.png" alt="green chest" />
@@ -96,6 +109,7 @@
                             </div>
                         </div>
                         <div class="filters__chests--blue">
+                            <p class="category-name" id="category-name-blue-chests">Blue Chests</p>
                             <input type="checkbox" name="blue-chest" value="blue-chest" id="blue-chest-checkbox"/> 
                             <label for="blue-chest-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/bluechest.png" alt="blue chest" />
@@ -119,6 +133,7 @@
                             </div>
                         </div>
                         <div class="filters__chests--gold">
+                            <p class="category-name " id="category-name-gold-chests">Gold Chests</p>
                             <input type="checkbox" name="gold-chest" value="gold-chest" id="gold-chest-checkbox"/> 
                                 <label for="gold-chest-checkbox">
                                     <img src="../images/icons/checkTheAvaRoadTool/result-icons/goldenchest.png" alt="gold chest" />
@@ -142,9 +157,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filters__dungeons">
-                        <p>Dungeons:</p>
+                    <div class="filters__dungeons" id="filters-option-dungeons">
                         <div class="filters__dungeons--holder">
+                            <p class="category-name" id="category-name-dungeons">Group Dungeons</p>
                             <input type="checkbox" name="dungeons" value="dungeons" id="dungeons-checkbox"/> 
                             <label for="dungeons-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="dungeon"/>
@@ -169,12 +184,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filters__gatheringspots">
-                        <p>Gathering Spots:</p>
+                    <div class="filters__gatheringspots" id="filters-option-gatheringspots">
                         <div class="filters__gathering-spots--leather">
+                            <p class="category-name" id="category-name-leather-spots">Leather Spots</p>
                             <input type="checkbox" name="leather" value="leather" id="leather-checkbox"/> 
                             <label for="leather-checkbox">
-                                <span>Leather:</span>
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="leather"/>
                             </label>
                             <div class="filters__leather--wrapper hidden" id="leather-filter">
@@ -196,9 +210,9 @@
                             </div>
                         </div>
                         <div class="filters__gathering-spots--iron">
+                            <p class="category-name" id="category-name-iron-spots">Iron spots</p>
                             <input type="checkbox" name="iron" value="iron" id="iron-checkbox"/> 
                             <label for="iron-checkbox">
-                                <span>Iron:</span>
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="iron"/>
                             </label>
                             <div class="filters__iron--wrapper hidden" id="iron-filter">
@@ -220,8 +234,9 @@
                             </div>
                         </div>
                         <div class="filters__gathering-spots--stone">
+                            <p class="category-name" id="category-name-stone-spots">Stone Spots</p>
                             <input type="checkbox" name="stone" value="stone" id="stone-checkbox"/> 
-                            <label for="stone-checkbox">Stone:
+                            <label for="stone-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="stone"/>
                             </label>
                             <div class="filters__stone--wrapper hidden" id="stone-filter">
@@ -243,8 +258,9 @@
                             </div>
                         </div>
                         <div class="filters__gathering-spots--wood">
+                            <p class="category-name" id="category-name-wood-spots">Wood Spots</p>
                             <input type="checkbox" name="wood" value="wood" id="wood-checkbox"/> 
-                            <label for="wood-checkbox">Wood:
+                            <label for="wood-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="wood"/>
                             </label>
                             <div class="filters__wood--wrapper hidden" id="wood-filter">
@@ -266,8 +282,9 @@
                             </div>
                         </div>
                         <div class="filters__gathering-spots--flux">
+                            <p class="category-name" id="category-name-flux-spots">Flux Spots</p>
                             <input type="checkbox" name="flux" value="flux" id="flux-checkbox"/> 
-                            <label for="flux-checkbox">Flux:
+                            <label for="flux-checkbox">
                                 <img src="../images/icons/checkTheAvaRoadTool/result-icons/dung.png" alt="flux"/>
                             </label>
                             <div class="filters__flux--wrapper hidden" id="flux-filter">
@@ -289,7 +306,7 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
                 </div>
 
          
@@ -302,7 +319,6 @@
             
             <footer class="footer">Website created by Goteii#1134. All rights reserved. &reg;</footer>
         </main>
-        <script type="module" src="../js/checkTheAvaRoad.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+        <script type="module" src="../js/minified/checkTheAvaRoad.min.js"></script>
     </body>
 </head>

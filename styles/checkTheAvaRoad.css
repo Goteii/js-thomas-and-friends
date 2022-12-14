@@ -113,6 +113,8 @@ body::after {
 }
 
 .content {
+  position: relative;
+  min-height: 100vh;
   width: 70%;
   height: auto;
   margin: auto;
@@ -121,6 +123,9 @@ body::after {
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   font-family: "Barlow", sans-serif;
   font-weight: 100;
   color: #ffffff;
@@ -256,20 +261,45 @@ body::after {
   border: none;
 }
 
-.search__btn {
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-family: "Barlow", sans-serif;
+.search__component--basic-controls, .search__component--additional-controls {
+  display: flex;
 }
 
-.search__btn:hover {
+.search__btn, .clear__filters--btn, .hide-filters-btn {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(82, 14, 82, 0.95);
+  font-family: "Barlow", sans-serif;
+  background: transparent;
+  color: #eee;
+  position: relative;
+}
+
+.clear__filters--btn {
+  margin-left: 10px;
+  padding: 0 25px 0 10px;
+}
+
+.hide-filters-btn {
+  margin-left: 10px;
+}
+
+.search__btn:hover, .clear__filters--btn:hover, .hide-filters-btn:hover {
   cursor: pointer;
+}
+
+.clear__filters--btn::after {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  content: url("../images/icons/filter-svgrepo-com.svg");
+  margin-left: 2.5px;
 }
 
 .filters {
   background-color: rgba(32, 6, 32, 0.95);
   display: flex;
+  flex-direction: column;
   color: #ffffff;
   font-family: "Barlow", sans-serif;
   margin-bottom: 50px;
@@ -279,12 +309,74 @@ body::after {
   padding-top: 10px;
 }
 
-.filters__chests, .filters__dungeons, .filters__gatheringspots {
-  width: 30%;
-  margin: 0 auto;
-  text-align: center;
+.filters__tabs {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  font-size: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.filters__tabs:hover {
+  cursor: pointer;
+}
+
+.filters__tab--chests, .filters__tab--dungeons, .filters__tab--gatheringspots {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  color: rgba(125, 22, 125, 0.95);
+  letter-spacing: 0.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filters__tab--chests, .filters__tab--gatheringspots {
+  border: 2px solid rgba(82, 14, 82, 0.95);
+}
+
+.filters__tab--dungeons {
+  border-top: 2px solid rgba(82, 14, 82, 0.95);
+  border-bottom: 2px solid rgba(82, 14, 82, 0.95);
+}
+
+.filters__options {
+  display: flex;
+  min-height: 380px;
+}
+
+.filters__options p {
+  padding: 0 0 10px 0;
+}
+
+.category-name, .tab-exclamation {
+  position: relative;
+}
+
+.category-exclamation::after, .tab-exclamation::after {
+  content: url("../images/icons/exclamation-mark-svgrepo-com.svg");
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+.category-exclamation::after {
+  top: -10px;
+}
+
+.tab-exclamation::after {
+  right: 5px;
+  top: 5px;
+}
+
+.filters__chests, .filters__dungeons, .filters__gatheringspots {
+  min-width: 100%;
+  padding-top: 20px;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
 }
 
 .filters__chests--chest {
@@ -293,6 +385,14 @@ body::after {
   align-items: flex-end;
   justify-content: center;
   margin-bottom: 12.5px;
+}
+
+.filters__chests--green, .filters__chests--blue, .filters__chests--gold, .filters__dungeons--holder {
+  width: 33.3%;
+}
+
+.filters__gathering-spots--leather, .filters__gathering-spots--iron, .filters__gathering-spots--stone, .filters__gathering-spots--wood, .filters__gathering-spots--flux {
+  width: 20%;
 }
 
 #green-chest-checkbox, #blue-chest-checkbox, #gold-chest-checkbox, #dungeons-checkbox, #leather-checkbox,
@@ -374,14 +474,92 @@ p[class*=error] {
   color: red;
 }
 
+.covered {
+  display: none;
+}
+
+.show {
+  opacity: 1;
+}
+
+.show-animated {
+  opacity: 1;
+  overflow: hidden;
+  -webkit-animation: slide-out 1s ease forwards;
+          animation: slide-out 1s ease forwards;
+}
+
+.covered-animated {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-animation: slide-in 1s ease forwards;
+          animation: slide-in 1s ease forwards;
+}
+
+.active {
+  background: rgba(50, 9, 50, 0.95);
+}
+
+@-webkit-keyframes slide-in {
+  from {
+    max-height: 2200px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    max-height: 2200px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+@-webkit-keyframes slide-out {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 2200px;
+  }
+}
+@keyframes slide-out {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 2200px;
+  }
+}
 .result {
   font-family: "Barlow", sans-serif;
   font-weight: 500;
   color: #ffffff;
   max-width: 360px;
-  margin: 10px 30px;
+  margin: 10px 30px 40px;
   background-color: rgba(32, 6, 32, 0.95);
   border-radius: 15px;
+}
+
+.results-not-found {
+  position: relative;
+  color: #fff;
+  font-family: "Barlow", sans-serif;
+  text-align: center;
+  padding-top: 30px;
+  width: 100%;
+}
+
+.results-not-found::after {
+  position: absolute;
+  content: url("../images/icons/sad-emoticon.svg");
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 120px;
 }
 
 .result img {
@@ -517,11 +695,53 @@ p[class*=error] {
     display: flex;
     flex-direction: column;
   }
-  .filters__chests, .filters__dungeons {
+  .filters__chests {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .filters__dungeons {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .filters__gatheringspots {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filters__gathering-spots--leather, .filters__gathering-spots--iron, .filters__gathering-spots--stone, .filters__gathering-spots--wood, .filters__gathering-spots--flux {
     width: 100%;
   }
   .filters__chests--gold, .filters__dungeons--wrapper {
     border-bottom: 1px solid rgba(93, 16, 93, 0.95);
     padding-bottom: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .search__component {
+    flex-direction: column;
+  }
+  .search__component input {
+    width: 75%;
+  }
+  .search__component--additional-controls {
+    width: 95%;
+    margin: 15px auto 0;
+  }
+  .search__component--additional-controls button {
+    width: 50%;
+  }
+}
+@media (max-width: 576px) {
+  .legend .items {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filters__tabs {
+    font-size: 18px;
+  }
+  .filters__tab--chests, .filters__tab--dungeons, .filters__tab--gatheringspots {
+    padding: 10px;
   }
 }/*# sourceMappingURL=checkTheAvaRoad.css.map */

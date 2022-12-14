@@ -130,7 +130,19 @@ const getClassNameForMapName = (searchResult) => {
 
 const createResults = (results) => {
   const searchResultsWrapper = document.getElementById("search-results");
-  results &&
+  if (!results.length) {
+    const notFoundParagraph = document.createElement("p");
+    notFoundParagraph.innerHTML =
+      "We couldnt find a result matching your applied filters/requirements. We might not have that kind of Avalonian Road in our database or it simply doesnt exist.";
+    notFoundParagraph.className = "results-not-found";
+    notFoundParagraph.id = "results-not-found";
+    console.log(notFoundParagraph);
+    searchResultsWrapper.appendChild(notFoundParagraph);
+  }
+  results.length &&
+    document.getElementById("results-not-found") &&
+    document.getElementById("results-not-found").remove();
+  results.length &&
     results.forEach((el) => {
       const resultWrapper = document.createElement("div");
       resultWrapper.className = "result";
@@ -313,7 +325,7 @@ const filtersAmountRequirements = {
   blueChests: 3,
   goldChests: 3,
   dungeons: 3,
-  gatheringSpots: 5,
+  gatheringSpots: 11,
 };
 
 const createRemoveBtn = (type, fieldsetId, btnId, wrapperId) => {
@@ -330,7 +342,6 @@ const createRemoveBtn = (type, fieldsetId, btnId, wrapperId) => {
     .id.split("-")
     .splice(-1)[0];
   const fieldset = document.getElementById(`${fieldsetId}-${latestIdNumber}`);
-  console.log("latestId", latestIdNumber, "fieldset", fieldset);
   removeBtn.onclick = () => {
     fieldset.remove();
     filtersAmount[type]--;
@@ -349,21 +360,20 @@ const getProperId = (type, fieldsetId, currentId) => {
   }
   if (wrapper) {
     const incremented = ++freeId;
-    console.log(incremented, "incremenedrted");
 
     return getProperId(type, fieldsetId, incremented);
   }
 };
 
 const createFilters = (type, wrapperId, htmlNodeName, btnId, fieldsetId) => {
-  createRemoveBtn(type, fieldsetId, btnId, wrapperId);
+  if (filtersAmount[type] !== filtersAmountRequirements[type]) {
+    createRemoveBtn(type, fieldsetId, btnId, wrapperId);
+  }
   if (filtersAmount[type] >= filtersAmountRequirements[type]) {
     return;
   }
   filtersAmount[type]++;
   const id = getProperId(type, fieldsetId, 1);
-  console.log("id", id);
-  console.log(filtersAmount[type]);
   const addFilterBtn = document.getElementById(btnId);
   addFilterBtn.remove();
   const wrapper = document.getElementById(wrapperId);
@@ -435,14 +445,53 @@ const createFilters = (type, wrapperId, htmlNodeName, btnId, fieldsetId) => {
     wrapper.appendChild(chestWrapper);
   }
 
-  const len = Array.from(wrapper.children).filter((child) =>
+  const length = Array.from(wrapper.children).filter((child) =>
     child.id.includes(fieldsetId)
   ).length;
-  console.log("len", len);
   chestWrapper.appendChild(addFilterBtn);
-  if (len === 3) {
+  if (length === 3) {
     addFilterBtn.classList.add("hidden");
   }
+};
+
+/// -------------------------------- TO ESTABLISH KEY FORMAT
+const categoryNameIdTabIdDictionary = {
+  "green-chest": {
+    categoryNameId: "category-name-green-chests",
+    tabId: "filters-option-chests-tab",
+  },
+  "blue-chest": {
+    categoryNameId: "category-name-blue-chests",
+    tabId: "filters-option-chests-tab",
+  },
+  "gold-chest": {
+    categoryNameId: "category-name-gold-chests",
+    tabId: "filters-option-chests-tab",
+  },
+  dungeons: {
+    categoryNameId: "category-name-dungeons",
+    tabId: "filters-option-dungeons-tab",
+  },
+  leather: {
+    categoryNameId: "category-name-leather-spots",
+    tabId: "filters-option-gatheringspots-tab",
+  },
+  iron: {
+    categoryNameId: "category-name-iron-spots",
+    tabId: "filters-option-gatheringspots-tab",
+  },
+  wood: {
+    categoryNameId: "category-name-wood-spots",
+    tabId: "filters-option-gatheringspots-tab",
+  },
+  stone: {
+    categoryNameId: "category-name-stone-spots",
+    tabId: "filters-option-gatheringspots-tab",
+  },
+  flux: {
+    categoryNameId: "category-name-flux-spots",
+    tabId: "filters-option-gatheringspots-tab",
+  },
 };
 
 const mainItemCheckboxesDictionary = {
@@ -453,6 +502,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-green-chest",
     checkboxId: "green-chest-checkbox",
     fieldsetId: "green-chest-fieldset",
+    // categoryNameId: "category-name-green-chests",
+    // tabId: "filters-option-chests-tab",
   },
   blueChest: {
     type: "blueChests",
@@ -461,6 +512,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-blue-chest",
     checkboxId: "blue-chest-checkbox",
     fieldsetId: "blue-chest-fieldset",
+    // categoryNameId: "category-name-blue-chests",
+    // tabId: "filters-option-chests-tab",
   },
   goldChest: {
     type: "goldChests",
@@ -469,6 +522,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-gold-chest",
     checkboxId: "gold-chest-checkbox",
     fieldsetId: "gold-chest-fieldset",
+    // categoryNameId: "category-name-gold-chests",
+    // tabId: "filters-option-chests-tab",
   },
   dungeons: {
     type: "dungeons",
@@ -477,6 +532,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-dungeons",
     checkboxId: "dungeons-checkbox",
     fieldsetId: "dungeons-fieldset",
+    // categoryNameId: "category-name-dungeons",
+    // tabId: "filters-option-dungeons-tab",
   },
   leather: {
     type: "gatheringSpots",
@@ -485,6 +542,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-leather",
     checkboxId: "leather-checkbox",
     fieldsetId: "leather-fieldset",
+    // categoryNameId: "category-name-leather-spots",
+    // tabId: "filters-option-gatheringspots-tab",
   },
   iron: {
     type: "gatheringSpots",
@@ -493,6 +552,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-iron",
     checkboxId: "iron-checkbox",
     fieldsetId: "iron-fieldset",
+    // categoryNameId: "category-name-iron-spots",
+    // tabId: "filters-option-gatheringspots-tab",
   },
   wood: {
     type: "gatheringSpots",
@@ -501,6 +562,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-wood",
     checkboxId: "wood-checkbox",
     fieldsetId: "wood-fieldset",
+    // categoryNameId: "category-name-wood-spots",
+    // tabId: "filters-option-gatheringspots-tab",
   },
   stone: {
     type: "gatheringSpots",
@@ -509,6 +572,8 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-stone",
     checkboxId: "stone-checkbox",
     fieldsetId: "stone-fieldset",
+    // categoryNameId: "category-name-stone-spots",
+    // tabId: "filters-option-gatheringspots-tab",
   },
   flux: {
     type: "gatheringSpots",
@@ -517,11 +582,10 @@ const mainItemCheckboxesDictionary = {
     btnId: "add-filter-flux",
     checkboxId: "flux-checkbox",
     fieldsetId: "flux-fieldset",
+    // categoryNameId: "category-name-flux-spots",
+    // tabId: "filters-option-gatheringspots-tab",
   },
 };
-//---------THERE IS A BUG -> After validating and receiving error messages then unchecking checkbox and checking it again we lose field or button gets added. + console errors
-// check bugs
-// add button for showing/hiding filters - hidden by default
 
 //listeners
 const listenToMainCheckboxes = () => {
@@ -541,10 +605,14 @@ const listenToMainCheckboxes = () => {
           wrapper.classList.remove("error-wrapper");
         //clear fields and add button for 1st row
         if (wrapper.children.length > 1) {
-          Array.from(wrapper.children).forEach((nodeEl) => {
-            if (!nodeEl.id.includes("1")) nodeEl.remove();
+          const lastFieldsetIdx =
+            Array.from(wrapper.children).filter((el) => el.id).length - 1;
+          Array.from(wrapper.children).forEach((nodeEl, idx) => {
+            if (idx !== lastFieldsetIdx) nodeEl.remove();
           });
           filtersAmount[config.type] = 1;
+          addFilterBtnReference.classList.contains("hidden") &&
+            addFilterBtnReference.classList.remove("hidden");
           wrapper.children[0].appendChild(addFilterBtnReference);
         }
         // if (addFilterBtn) {
@@ -563,7 +631,9 @@ const listenToMainCheckboxes = () => {
               config.filterId,
               config.htmlNodeName,
               config.btnId,
-              config.fieldsetId
+              config.fieldsetId,
+              config.categoryNameId,
+              config.tabId
             );
           };
         }
@@ -600,26 +670,41 @@ const tiersIdToAmountsIdDic = {
 
 //to change values
 const errorMsgsDictionary = {
-  tier: "You cant look for the same tiers of the same thing in two different fields of the same fieldset",
-  amount: "There is no map in game with more than 7 spots of the same thing",
+  tier: "You cant look for the same tiers of the same thing in two different fieldsets of the same thing",
+  amount:
+    "Amount of thing you are looking for must be more than 1 and less than 7",
+};
+
+let validation = {
+  result: "no-errors",
+  fieldsetsInfo: {
+    "green-chest-filter": {},
+    "blue-chest-filter": {},
+    "gold-chest-filter": {},
+    "dungeons-filter": {},
+    "leather-filter": {},
+    "iron-filter": {},
+    "stone-filter": {},
+    "wood-filter": {},
+    "flux-filter": {},
+  },
 };
 
 const validateFilters = () => {
-  const validation = {
-    result: "no-errors",
-    fieldsetsInfo: {
-      "green-chest-filter": {},
-      "blue-chest-filter": {},
-      "gold-chest-filter": {},
-      "dungeons-filter": {},
-      "leather-filter": {},
-      "iron-filter": {},
-      "stone-filter": {},
-      "wood-filter": {},
-      "flux-filter": {},
-    },
-  };
-
+  // const validation = {
+  //   result: "no-errors",
+  //   fieldsetsInfo: {
+  //     "green-chest-filter": {},
+  //     "blue-chest-filter": {},
+  //     "gold-chest-filter": {},
+  //     "dungeons-filter": {},
+  //     "leather-filter": {},
+  //     "iron-filter": {},
+  //     "stone-filter": {},
+  //     "wood-filter": {},
+  //     "flux-filter": {},
+  //   },
+  // };
   clearErrorMessages(validation.fieldsetsInfo);
   const checkedFilters = [];
   for (const [checkboxId, filterId] of Object.entries(
@@ -652,19 +737,12 @@ const validateFilters = () => {
           ).value;
 
           if (selectedTiers.includes(tierValue)) {
-            //ERROR, TELL USER THAT YOU CANT HAVE THE SAME TIERS IN TWO DIFFERENT SELECTS.
-            console.log(
-              "You cant look for the same tiers of the same thing in two different fields"
-            );
             validation.result = "error";
             validation.fieldsetsInfo[el.filter.id]["tier"] =
               errorMsgsDictionary.tier;
           }
           !selectedTiers.includes(tierValue) && selectedTiers.push(tierValue);
-          if (amountValue > 7) {
-            console.log(
-              "There is no map in game with more than 7 spots of the same thing"
-            );
+          if (amountValue > 7 || amountValue < 1) {
             validation.result = "error";
             validation.fieldsetsInfo[el.filter.id]["amount"] =
               errorMsgsDictionary.amount;
@@ -680,23 +758,57 @@ const validateFilters = () => {
 
   if (!checkedFilters.length) validation.result = "no-filters";
 
-  console.log(validation);
   return validation;
 };
 
 const clearErrorMessages = (fieldsetsObj) => {
   Object.keys(fieldsetsObj).forEach((fieldsetId) => {
     const fieldset = document.getElementById(fieldsetId);
+    const fieldsetIdSplit = fieldsetId.split("-");
+    fieldsetIdSplit.pop();
+    const categoryNameJoined = fieldsetIdSplit.join("-");
+    const categoryNameId =
+      categoryNameIdTabIdDictionary[categoryNameJoined].categoryNameId;
+    const tabId = categoryNameIdTabIdDictionary[categoryNameJoined].tabId;
+    const categoryNameNodeEl = document.getElementById(categoryNameId);
+    const tabNodeEl = document.getElementById(tabId);
     Array.from(fieldset.children).forEach((children) => {
       children.className.includes("error") && children.remove();
-      Array.from(fieldset.classList).includes("error-wrapper") &&
-        fieldset.classList.remove("error-wrapper");
+      // Array.from(fieldset.classList).includes("error-wrapper") &&
+      //   fieldset.classList.remove("error-wrapper");
+      categoryNameNodeEl.classList.contains("category-exclamation") &&
+        categoryNameNodeEl.classList.remove("category-exclamation");
+      tabNodeEl.classList.contains("tab-exclamation") &&
+        tabNodeEl.classList.remove("tab-exclamation");
     });
   });
+  validation = {
+    result: "no-errors",
+    fieldsetsInfo: {
+      "green-chest-filter": {},
+      "blue-chest-filter": {},
+      "gold-chest-filter": {},
+      "dungeons-filter": {},
+      "leather-filter": {},
+      "iron-filter": {},
+      "stone-filter": {},
+      "wood-filter": {},
+      "flux-filter": {},
+    },
+  };
 };
 
 const createErrorMsg = (fieldsetsObj) => {
   for (const [fieldsetId, fieldsetError] of Object.entries(fieldsetsObj)) {
+    //to fix in refactor step
+    const fieldsetIdSplit = fieldsetId.split("-");
+    fieldsetIdSplit.pop();
+    const categoryNameJoined = fieldsetIdSplit.join("-");
+    const categoryNameId =
+      categoryNameIdTabIdDictionary[categoryNameJoined].categoryNameId;
+    const tabId = categoryNameIdTabIdDictionary[categoryNameJoined].tabId;
+    const categoryNameNodeEl = document.getElementById(categoryNameId);
+    const tabNodeEl = document.getElementById(tabId);
     if (Object.keys(fieldsetError).length) {
       const fieldset = document.getElementById(fieldsetId);
       Object.values(fieldsetError).forEach((errorMsg, idx) => {
@@ -704,7 +816,9 @@ const createErrorMsg = (fieldsetsObj) => {
         errorText.innerHTML = errorMsg;
         errorText.className = `error-${idx}`;
         fieldset.appendChild(errorText);
-        fieldset.classList.add("error-wrapper");
+        categoryNameNodeEl.classList.add("category-exclamation");
+        tabNodeEl.classList.add("tab-exclamation");
+        // fieldset.classList.add("error-wrapper");
       });
     }
   }
@@ -829,8 +943,18 @@ const getFilteredResults = (searchValue) => {
   return filteredRoads;
 };
 
+const clearFilters = () => {
+  const filters = document.querySelectorAll(`input[id*="checkbox"]`);
+  const appliedFilters = Array.from(filters).filter((filter) => filter.checked);
+  appliedFilters.forEach((appliedFilter) => appliedFilter.click());
+  clearErrorMessages(validation.fieldsetsInfo);
+};
+
 const searchBtn = document.getElementById("search__btn");
 searchBtn.addEventListener("click", () => fetchAvaRoads());
+
+const clearFiltersBtn = document.getElementById("clear-filters");
+clearFiltersBtn.addEventListener("click", () => clearFilters());
 
 // const searchInput = document.getElementById("searchInput");
 
@@ -838,5 +962,69 @@ document.querySelector("body").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     searchBtn.click();
+  }
+});
+
+const filterTabsIdTofilterOptionsId = {
+  "filters-option-chests-tab": "filters-option-chests",
+  "filters-option-dungeons-tab": "filters-option-dungeons",
+  "filters-option-gatheringspots-tab": "filters-option-gatheringspots",
+};
+
+const showFilterOptions = (id, currentFilterTabId) => {
+  Object.keys(filterTabsIdTofilterOptionsId).forEach((filterTabId) => {
+    const filterTab = document.getElementById(filterTabId);
+    if (filterTabId === currentFilterTabId)
+      !filterTab.classList.contains("active") &&
+        filterTab.classList.add("active");
+    else {
+      filterTab.classList.contains("active") &&
+        filterTab.classList.remove("active");
+    }
+  });
+  Object.values(filterTabsIdTofilterOptionsId).forEach((filterOptionId) => {
+    const filterOption = document.getElementById(filterOptionId);
+    if (filterOption.id !== id) {
+      filterOption.classList.contains("show") &&
+        filterOption.classList.remove("show");
+      filterOption.classList.add("covered");
+    } else {
+      filterOption.classList.contains("covered") &&
+        filterOption.classList.remove("covered");
+      filterOption.classList.add("show");
+    }
+  });
+};
+
+showFilterOptions(
+  Object.values(filterTabsIdTofilterOptionsId)[0],
+  Object.keys(filterTabsIdTofilterOptionsId)[0]
+);
+
+const filtersTabs = document.getElementsByClassName("filters__tabs")[0];
+
+Array.from(filtersTabs.children).forEach((filterTab) => {
+  filterTab.addEventListener("click", () => {
+    showFilterOptions(
+      filterTabsIdTofilterOptionsId[filterTab.id],
+      filterTab.id
+    );
+  });
+});
+
+const hideFiltersBtn = document.getElementById("hide-filters");
+hideFiltersBtn.addEventListener("click", () => {
+  const filters = document.getElementById("filters");
+  if (filters.classList.contains("show-animated")) {
+    filters.classList.remove("show-animated");
+    filters.classList.add("covered-animated");
+    hideFiltersBtn.innerHTML = "Show filters";
+    clearFilters();
+  } else {
+    filters.classList.contains("covered") &&
+      filters.classList.remove("covered");
+    filters.classList.remove("covered-animated");
+    filters.classList.add("show-animated");
+    hideFiltersBtn.innerHTML = "Hide filters";
   }
 });
